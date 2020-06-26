@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hadoop配置与应用(一) | Do what you want</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="数据下载 hadoop配置与应用实践1 – 单机配置hadoop 环境配置 单台主机 192.168.2.131操作系统 Centos7.2hadoop-2.6.0-cdh5.7.0     环境准备   主机名  hostnamectl set-hostname master(centos6 使用vim &#x2F;etc&#x2F;sysconfig&#x2F;network)  配置hosts123vi &#x2F;et">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop配置与应用(一)">
+<meta property="og:url" content="http://yoursite.com/2020/06/26/Hadoop%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%BA%94%E7%94%A8-%E4%B8%80/index.html">
+<meta property="og:site_name" content="Do what you want">
+<meta property="og:description" content="数据下载 hadoop配置与应用实践1 – 单机配置hadoop 环境配置 单台主机 192.168.2.131操作系统 Centos7.2hadoop-2.6.0-cdh5.7.0     环境准备   主机名  hostnamectl set-hostname master(centos6 使用vim &#x2F;etc&#x2F;sysconfig&#x2F;network)  配置hosts123vi &#x2F;et">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-26T15:30:26.000Z">
+<meta property="article:modified_time" content="2020-06-26T15:39:13.874Z">
+<meta property="article:author" content="Mr.Yu">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Do what you want" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/yu.png">
+  <link rel="apple-touch-icon" href="/css/images/yu.png">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("/css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("/css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("/css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/yu.png">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Hadoop配置与应用-一" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Hadoop配置与应用(一)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2020/06/26/Hadoop%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%BA%94%E7%94%A8-%E4%B8%80/" class="article-date">
+	  <time datetime="2020-06-26T15:30:26.000Z" itemprop="datePublished">2020-06-26</time>
+	</a>
+
+      
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://pan.baidu.com/s/1S2zXnG8QIZkHLBOt7-yFxQ" target="_blank" rel="noopener">数据下载</a></p>
+<h2 id="hadoop配置与应用"><a href="#hadoop配置与应用" class="headerlink" title="hadoop配置与应用"></a>hadoop配置与应用</h2><h3 id="实践1-–-单机配置hadoop"><a href="#实践1-–-单机配置hadoop" class="headerlink" title="实践1 – 单机配置hadoop"></a>实践1 – 单机配置hadoop</h3><ul>
+<li>环境配置<blockquote>
+<p>单台主机 192.168.2.131<br>操作系统 Centos7.2<br>hadoop-2.6.0-cdh5.7.0</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>环境准备</p>
+</blockquote>
+<ol>
+<li>主机名</li>
+</ol>
+<p><code>hostnamectl set-hostname master</code><br>(centos6 使用<code>vim /etc/sysconfig/network</code>)</p>
+<ol start="2">
+<li>配置hosts<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;hosts</span><br><span class="line">添加</span><br><span class="line">192.168.2.131 master</span><br></pre></td></tr></table></figure></li>
+<li>配置SSH免密码</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br><span class="line">cd .ssh&#x2F;</span><br><span class="line">touch authorized_keys</span><br><span class="line">cat id_rsa.pub &gt;&gt;authorized_keys</span><br><span class="line">测试：</span><br><span class="line">ssh master</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>安装配置jdk</li>
+</ol>
+<ol>
+<li>解压JDK并配置到环境变量中</li>
+</ol>
+<p><code>tar -xvf jdk-8u171-linux-x64.tar -C /usr/local/</code></p>
+<p>配置到环境变量中</p>
+<p><code>vi ~/.bash_profile</code></p>
+<p>添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 配置jdk</span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;jdk1.8.0_171</span><br><span class="line">export PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin</span><br></pre></td></tr></table></figure>
+
+<p>使环境变量生效</p>
+<p><code>source ~/.bash_profile</code></p>
+<p>验证是否生效<br><code>java -version</code><br>显示说明成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java version &quot;1.8.0_171&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_171-b11)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.171-b11, mixed mode)</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>配置单机伪分布</p>
+</blockquote>
+<ol>
+<li>解压hadoop并配置到环境变量中</li>
+</ol>
+<p><code>tar -zxvf hadoop-2.6.0-cdh5.7.0.tar.gz -C /usr/local/</code></p>
+<p>配置到环境变量中</p>
+<p><code>vi ~/.bash_profile</code></p>
+<p>添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 配置hadoop</span><br><span class="line">export HADOOP_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;hadoop-2.6.0-cdh5.7.0</span><br><span class="line">export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;bin:$HADOOP_HOME&#x2F;sbin</span><br></pre></td></tr></table></figure>
+
+<p>使环境变量生效</p>
+<p><code>source ~/.bash_profile</code></p>
+<ol start="2">
+<li>配置core-site.xml</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HADOOP_HOME&#x2F;etc&#x2F;hadoop&#x2F;</span><br><span class="line">vi core-site.xml</span><br></pre></td></tr></table></figure>
+
+
+<p>添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;fs.defaultFS&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;hdfs:&#x2F;&#x2F;master:8020&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;hadoop.tmp.dir&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;&#x2F;root&#x2F;hdfs&#x2F;tmp&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+
+<p>创建hadoop常用目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd</span><br><span class="line">mkdir -p hdfs&#x2F;tmp</span><br></pre></td></tr></table></figure>
+
+<p>该目录默认使用/tmp,但是/tmp是Linux存放临时文件的，不适合用于保存数据</p>
+<ol start="3">
+<li>配置hdfs-site.xml</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HADOOP_HOME&#x2F;etc&#x2F;hadoop&#x2F;</span><br><span class="line">vi hdfs-site.xml</span><br></pre></td></tr></table></figure>
+
+
+<p>添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;1&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><a href="http://xn--hadoop-env-o150at28m.sh" target="_blank" rel="noopener">配置hadoop-env.sh</a></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HADOOP_HOME&#x2F;etc&#x2F;hadoop&#x2F;</span><br><span class="line">vi hadoop-env.sh</span><br></pre></td></tr></table></figure>
+
+<p>修改</p>
+<p><code>export JAVA_HOME=/usr/local/jdk1.8.0_171</code></p>
+<ol start="5">
+<li>编辑slaves文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HADOOP_HOME&#x2F;etc&#x2F;hadoop&#x2F;</span><br><span class="line">vi slaves</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>删除localhost，并添加</p>
+<p><code>master</code></p>
+<ol start="6">
+<li>首次启动hdfs，需要格式化hdfs</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HADOOP_HOME</span><br><span class="line">bin&#x2F;hdfs namenode -format</span><br></pre></td></tr></table></figure>
+
+
+<p>启动hdfs</p>
+<p><code>sbin/start-dfs.sh</code></p>
+<ol start="7">
+<li>配置mapred.xml</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd $HADOOP_HOME&#x2F;etc&#x2F;hadoop&#x2F;</span><br><span class="line">cp mapred-site.xml.template mapred-site.xml</span><br><span class="line">vi mapred-site.xml</span><br></pre></td></tr></table></figure>
+
+<p>添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;mapreduce.framework.name&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;yarn&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>配置yarn-site.xml</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HADOOP_HOME&#x2F;etc&#x2F;hadoop&#x2F;</span><br><span class="line">vi yarn-site.xml</span><br></pre></td></tr></table></figure>
+
+
+<p>添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.nodemanager.aux-services&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;mapreduce_shuffle&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="9">
+<li>启动yarn</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HADOOP_HOME&#x2F;</span><br><span class="line">sbin&#x2F;start-yarn.sh</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>验证</p>
+</blockquote>
+<ol>
+<li>验证hdfs</li>
+</ol>
+<ul>
+<li>jps应该看到<br>NameNode<br>DataNode<br>SecondaryNameNode</li>
+<li>浏览器查看<br><a href="http://192.168.2.131:50070" target="_blank" rel="noopener">http://192.168.2.131:50070</a></li>
+</ul>
+<blockquote>
+<p>注意：<br>1、防火墙是否放行端口<br>2、hdfs的服务端口是8020，但是web界面的端口是50070</p>
+</blockquote>
+<ol start="2">
+<li>验证yarn</li>
+</ol>
+<ul>
+<li>jps应该看到<br>NodeManager<br>ResourceManager<br>NameNode<br>DataNode<br>SecondaryNameNode</li>
+<li>浏览器查看<br><a href="http://192.168.2.131:8088" target="_blank" rel="noopener">http://192.168.2.131:8088</a></li>
+</ul>
+<h3 id="实践2-–多主机配置Hadoop-HA集群"><a href="#实践2-–多主机配置Hadoop-HA集群" class="headerlink" title="实践2 –多主机配置Hadoop HA集群"></a>实践2 –多主机配置Hadoop HA集群</h3><blockquote>
+<p>hadoop HA集群 —— 用于小规模集群环境<br>环境要求<br>操作系统 Centos7.2最小安装<br>hadoop hadoop-2.6.0-cdh5.7.0</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>主机ip</th>
+<th>主机名</th>
+<th>集群中的角色</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.2.131</td>
+<td>master</td>
+<td>NameNode(active)</td>
+</tr>
+<tr>
+<td>192.168.2.132</td>
+<td>standby</td>
+<td>NameNode(standby)</td>
+</tr>
+<tr>
+<td>192.168.2.133</td>
+<td>slave1</td>
+<td>DataNode,JournalNode,zooKeeper</td>
+</tr>
+<tr>
+<td>192.168.2.13 4</td>
+<td>slave2</td>
+<td>DataNode,JournalNode,zooKeeper</td>
+</tr>
+<tr>
+<td>192.168.2.135</td>
+<td>slave3</td>
+<td>DataNode,JournalNode,zooKeeper</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>准备HA依赖环境</p>
+</blockquote>
+<ol>
+<li>安装配置jdk</li>
+</ol>
+<ul>
+<li>实验提供的虚拟机已经安装并配置了oracle-java</li>
+</ul>
+<p><code>echo $JAVA_HOME</code></p>
+<ol start="2">
+<li>解压hadoop，zookeeper文件到相应主机的/usr/local</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-2.6.0-cdh5.7.0.tar.gz -C &#x2F;usr&#x2F;local&#x2F;</span><br><span class="line">tar -zxvf zookeeper-3.4.5-cdh5.7.0.tar.gz -C &#x2F;usr&#x2F;local&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>并配置到环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;profile</span><br><span class="line"># 配置hadoop</span><br><span class="line">export HADOOP_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;hadoop-2.6.0-cdh5.7.0</span><br><span class="line">export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;sbin:$HADOOP_HOME&#x2F;bin</span><br></pre></td></tr></table></figure>
+
+
+<p>使环境变量生效</p>
+<p><code>source /etc/profile</code></p>
+<ol start="3">
+<li>编辑hosts文件</li>
+</ol>
+<p><code>vi /etc/hosts</code></p>
+<p>添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">192.168.2.131 master</span><br><span class="line">192.168.2.132 standby</span><br><span class="line">192.168.2.133 slave1</span><br><span class="line">192.168.2.134 slave2</span><br><span class="line">192.168.2.135 slave3</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>关闭防火墙</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>配置ZooKeeper集群</p>
+</blockquote>
+<ol>
+<li>修改conf配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;zookeeper-3.4.5-cdh5.7.0&#x2F;conf</span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br><span class="line">vi zoo.cfg</span><br></pre></td></tr></table></figure>
+<p>添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dataDir&#x3D;&#x2F;root&#x2F;zookeeper&#x2F;data</span><br><span class="line">dataLogDir&#x3D;&#x2F;root&#x2F;zookeeper&#x2F;logs</span><br><span class="line"># the port at which the clients will connect</span><br><span class="line">clientPort&#x3D;2181</span><br><span class="line">server.1&#x3D;slave1:2888:3888</span><br><span class="line">server.2&#x3D;slave2:2888:3888</span><br><span class="line">server.3&#x3D;slave3:2888:3888</span><br></pre></td></tr></table></figure>
+
+
+<ol start="2">
+<li>创建zookeeper所需目录</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd</span><br><span class="line">mkdir zookeeper</span><br><span class="line">cd zookeeper</span><br><span class="line">mkdir data logs</span><br></pre></td></tr></table></figure>
+
+<p>3.配置myid</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd data</span><br><span class="line">vi myid</span><br></pre></td></tr></table></figure>
+
+<p>添加</p>
+<p><code>1</code></p>
+<p>分别在slave各主机都设置myid，分别为1，2，3</p>
+<ol start="3">
+<li>启动zookeeper集群</li>
+</ol>
+<ul>
+<li>注意:设置防火墙放行相应端口<br>如果启动集群失败，可通过以下输出文件参看原因。</li>
+</ul>
+<p><code>cat bin/zookeeper.out</code><br>在每台服务器启动zookeeper</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> cd &#x2F;usr&#x2F;local&#x2F;zookeeper-3.4.5-cdh5.7.0&#x2F;bin&#x2F;</span><br><span class="line">.&#x2F;zkServer.sh start</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>查看效果</li>
+</ol>
+<p><code>./zkServer.sh status</code></p>
+<p>应该看到：一个leader，两个follower</p>
+<blockquote>
+<p>配置HDFS HA</p>
+</blockquote>
+<ol>
+<li>准备SSH免密登录环境</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br><span class="line">cd .ssh&#x2F;</span><br><span class="line">touch authorized_keys</span><br><span class="line">cat id_rsa.pub &gt;&gt; authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>同样方式将其他主机生成的公钥均负责到authorized_keys，每个占一行;<br>将合并好的authorized_keys文件负责到其他机器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp authorized_keys root@192.168.56.14:&#x2F;root&#x2F;.ssh&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>测试下</p>
+<p><code>ssh slave1</code></p>
+<ol start="2">
+<li>配置hadoop hdfs集群</li>
+</ol>
+<ul>
+<li>注意：先在<strong>master</strong>上配置<br>创建必要的目录，用于存放hdfs的相关数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd</span><br><span class="line">mkdir hdfs</span><br><span class="line">cd hdfs</span><br><span class="line">mkdir tmp journal</span><br></pre></td></tr></table></figure>
+
+<p>进入hadoop home目录进行配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;hadoop-2.6.0-cdh5.7.0&#x2F;</span><br><span class="line">cd etc&#x2F;hadoop</span><br></pre></td></tr></table></figure>
+
+<p>配置core-site.xml</p>
+<figure class="highlight plain"><figcaption><span>hdfs集群信息在hdfs-site.xml中配置 --></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;fs.defaultFS&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;hdfs:&#x2F;&#x2F;cluster&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;hadoop.tmp.dir&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;&#x2F;root&#x2F;hdfs&#x2F;tmp&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;io.file.buffer.size&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;4096&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;!-- 配置zookeeper集群 --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">  &lt;name&gt;ha.zookeeper.quorum&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;slave1:2181,slave2:2181,slave3:2181&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+<p>配置hdfs-site.xml</p>
+<figure class="highlight plain"><figcaption><span>HDFS集群信息 --></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.nameservices&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;cluster&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.ha.namenodes.cluster&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;node1,node2&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.namenode.rpc-address.cluster.node1&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;master:9000&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.namenode.http-address.cluster.node1&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;master:50070&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.namenode.rpc-address.cluster.node2&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;standby:9000&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.namenode.http-address.cluster.node2&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;standby:50070&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.namenode.shared.edits.dir&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;qjournal:&#x2F;&#x2F;slave1:8485;slave2:8485;slave3:8485&#x2F;cluster&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.journalnode.edits.dir&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;&#x2F;root&#x2F;hdfs&#x2F;journal&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.ha.automatic-failover.enabled&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;true&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.client.failover.proxy.provider.cluster&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.ha.fencing.methods&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;</span><br><span class="line">          sshfence</span><br><span class="line">      &lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.ha.fencing.ssh.private-key-files&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;&#x2F;root&#x2F;.ssh&#x2F;id_rsa&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.ha.fencing.ssh.connect-timeout&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;30000&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;!-- hdfs基础配置 --&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;2&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;dfs.webhdfs.enabled&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;true&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+
+<p>配置mapred-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;mapreduce.framework.name&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;yarn&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;mapreduce.jobhistory.address&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;master:10020&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;mapreduce.jobhistory.webapp.address&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;master:19888&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+<p>配置yarn-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 配置yarn集群 --&gt; </span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.ha.enabled&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;true&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.cluster-id&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;yrc&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.ha.rm-ids&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;rm1,rm2&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.hostname.rm1&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;master&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.hostname.rm2&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;standby-master&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.zk-address&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;slave1:2181,slave2:2181,slave3:2181&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;!-- 启用自动恢复 --&gt; </span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.recovery.enabled&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;true&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;!-- 指定resourcemanager的状态信息存储在zookeeper集群 --&gt; </span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.resourcemanager.store.class&lt;&#x2F;name&gt;     </span><br><span class="line">    &lt;value&gt;org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;yarn.nodemanager.aux-services&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;mapreduce_shuffle&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://xn--hadoop-env-o150at28m.sh" target="_blank" rel="noopener">配置hadoop-env.sh</a></p>
+<p><code>export JAVA_HOME=/usr/local/jdk1.8.0_171</code></p>
+<p><a href="http://xn--yarn-env-vz2ve12k.sh" target="_blank" rel="noopener">配置yarn-env.sh</a></p>
+<p><code>export JAVA_HOME=/usr/local/jdk1.8.0_171</code></p>
+<p>配置slaves</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">slave1</span><br><span class="line">slave2</span><br><span class="line">slave3</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>把配置文件同步到其他几台机器上</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r &#x2F;usr&#x2F;local&#x2F;hadoop-2.6.0-cdh5.7.0&#x2F;etc&#x2F;hadoop root@slave2:&#x2F;usr&#x2F;local&#x2F;hadoop-2.6.0-cdh5.7.0&#x2F;etc&#x2F;</span><br><span class="line">&#96;</span><br></pre></td></tr></table></figure>
+
+<p>把文件目录也同步到其他几台机器上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r hdfs&#x2F; root@slave1:&#x2F;root&#x2F;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>启动集群并验证</p>
+</blockquote>
+<ol>
+<li>启动hadoop集群</li>
+</ol>
+<ul>
+<li>注意：先在<strong>master</strong>上操作。</li>
+</ul>
+<p>启动journalnode：</p>
+<p><code>sbin/hadoop-daemons.sh start journalnode</code><br>在每个slave下jps，应该看到<strong>JournalNode</strong>。<br>接着，格式化zooKeeper：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin&#x2F;hdfs zkfc -formatZK</span><br></pre></td></tr></table></figure>
+
+<p>然后，格式化hdfs：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin&#x2F;hadoop namenode -formats</span><br></pre></td></tr></table></figure>
+
+<p>启动<strong>master</strong>的NameNode</p>
+<p><code>sbin/hadoop-daemon.sh start namenode</code></p>
+<p>切换在<strong>standby</strong>下执行:</p>
+<p><code>bin/hdfs namenode -bootstrapStandby</code></p>
+<p>现在可以启动整个集群了。回到<strong>master</strong>执行：</p>
+<p><code>sbin/start-dfs.sh</code></p>
+<ol start="2">
+<li>通过浏览器参看hdfs集群信息<br>停止active状态的NameNode，看是否能通过zookeeper自动切换</li>
+</ol>
+<p><code>sbin/hadoop-daemon.sh stop namenode</code></p>
+<ol start="3">
+<li>yarn集群<br>在<strong>master</strong>上执行：</li>
+</ol>
+<p><code>sbin/start-yarn.sh</code></p>
+<p>然后在<strong>standby</strong>上执行：</p>
+<p><code>sbin/yarn-daemon.sh start resourcemanager</code><br>此时，可查看集群状态</p>
+<p><code>bin/yarn rmadmin -getServiceState rm1</code></p>
+<h3 id="实践3-–-使用Ambari部署大数据集群"><a href="#实践3-–-使用Ambari部署大数据集群" class="headerlink" title="实践3 – 使用Ambari部署大数据集群"></a>实践3 – 使用Ambari部署大数据集群</h3><blockquote>
+<p>hadoop HA集群 —— 用于大规模生产环境<br>环境要求<br>操作系统 Centos7.2最小安装<br>hadoop HDP-2.3<br>ambari ambari-2.1<br>Ambari对安装主机有内存要求，ambari-server一般需要8G及以上，ambari-agent一般需要4G，磁盘也不宜太小，尽量不要少于50G。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>主机ip</th>
+<th>主机名</th>
+<th>ambari中的角色</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.2.131</td>
+<td>master</td>
+<td>ambari-server, ambari-agent</td>
+</tr>
+<tr>
+<td>192.168.2.132</td>
+<td>slave1</td>
+<td>ambari-agent</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>环境准备</p>
+</blockquote>
+<ol>
+<li>配置主机名</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># master</span><br><span class="line">hostnamectl set-hostname master</span><br><span class="line">hostname</span><br><span class="line"></span><br><span class="line"># slave1</span><br><span class="line">hostnamectl set-hostname slave1</span><br><span class="line">hostname</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>修改hosts文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># master &amp; slave1 </span><br><span class="line">vi &#x2F;etc&#x2F;hosts</span><br><span class="line">添加</span><br><span class="line">192.168.200.131 master.hadoop master</span><br><span class="line">192.168.200.133 slave1.hadoop</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>修改yum源</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># master &amp; slave1 </span><br><span class="line">cd &#x2F;etc&#x2F;yum.repos.d&#x2F;</span><br><span class="line">rm -vf *</span><br><span class="line">vi ambari.repo</span><br><span class="line">添加</span><br><span class="line">[centos7]</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;192.168.2.100&#x2F;centos&#x2F;</span><br><span class="line">gpgcheck&#x3D;0</span><br><span class="line">enabled&#x3D;1</span><br><span class="line">name&#x3D;centos</span><br><span class="line">[ambari]</span><br><span class="line">name&#x3D;ambari</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;192.168.2.100&#x2F;ambari&#x2F;centos7&#x2F;2.x&#x2F;updates&#x2F;2.1.0</span><br><span class="line">enabled&#x3D;1</span><br><span class="line">gpgcheck&#x3D;0</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>配置ntp</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># master</span><br><span class="line">yum -y install ntp</span><br><span class="line">vi &#x2F;etc&#x2F;ntp.conf</span><br><span class="line">注释或者删除以下四行</span><br><span class="line">server 0.centos.pool.ntp.org iburst</span><br><span class="line">server 1.centos.pool.ntp.org iburst</span><br><span class="line">server 2.centos.pool.ntp.org iburst</span><br><span class="line">server 3.centos.pool.ntp.org iburst</span><br><span class="line">添加以下两行</span><br><span class="line">server 127.127.1.0 </span><br><span class="line">fudge 127.127.1.0 stratum 10</span><br><span class="line">保存退出</span><br><span class="line"></span><br><span class="line">systemctl enable ntpd</span><br><span class="line">systemctl start  ntpd</span><br><span class="line"></span><br><span class="line"># slave1</span><br><span class="line">yum -y install ntpdate</span><br><span class="line">ntpdate master</span><br><span class="line">systemctl enable ntpdate</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>配置SSH</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># master &amp; slave1 </span><br><span class="line">yum install openssh-clients</span><br><span class="line">ssh-keygen -t rsa</span><br><span class="line">ssh-copy-id master</span><br><span class="line">ssh-copy-id slave1</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>禁用Transparent Huge Pages</li>
+</ol>
+<p>THP是一个系统级的内存优化服务，直接影响程序的内存访问性能，并且这个过程对于应用是透明的，在应用层面不可控制,对于专门为大页面进行优化的程序来说，可能会造成随机的性能下降现象。很多数据库应用都要求关闭该功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># master &amp; slave1 </span><br><span class="line">echo never &gt; &#x2F;sys&#x2F;kernel&#x2F;mm&#x2F;transparent_hugepage&#x2F;enabled</span><br><span class="line">echo never &gt; &#x2F;sys&#x2F;kernel&#x2F;mm&#x2F;transparent_hugepage&#x2F;defrag</span><br><span class="line">cat &#x2F;sys&#x2F;kernel&#x2F;mm&#x2F;transparent_hugepage&#x2F;enabled</span><br><span class="line">always madvise [never]</span><br></pre></td></tr></table></figure>
+
+<p>重启后失效，需要再次执行</p>
+<ol start="7">
+<li>安装JDK<br>提供给各位老师的虚拟机已经安装配置了oracle的jdk</li>
+</ol>
+<blockquote>
+<p>配置ambari-server</p>
+</blockquote>
+<ol>
+<li>安装MariaDB数据库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># master</span><br><span class="line">yum install  mariadb mariadb-server mysql-connector-java</span><br><span class="line">启动服务</span><br><span class="line">systemctl enable mariadb</span><br><span class="line">systemctl start mariadb</span><br><span class="line"></span><br><span class="line">配置MySQL</span><br><span class="line">mysql_secure_installation</span><br><span class="line">按enter确认后设置数据库root密码，我们这里设置为“bigdata”</span><br><span class="line">Remove anonymous users? [Y&#x2F;n] y</span><br><span class="line">Disallow root login remotely? [Y&#x2F;n] n</span><br><span class="line">Remove test database and access to it? [Y&#x2F;n] y</span><br><span class="line">Reload privilege tables now? [Y&#x2F;n] y</span><br><span class="line"></span><br><span class="line">创建ambari数据库</span><br><span class="line">mysql -uroot -pbigdata</span><br><span class="line">MariaDB [(none)]&gt; create database ambari;</span><br><span class="line">MariaDB [(none)]&gt; grant all privileges on ambari.* to &#39;ambari&#39;@&#39;localhost&#39; identified by &#39;bigdata&#39;;</span><br><span class="line">MariaDB [(none)]&gt; grant all privileges on ambari.* to &#39;ambari&#39;@&#39;%&#39; identified by &#39;bigdata&#39;;</span><br><span class="line">MariaDB [(none)]&gt; use ambari;</span><br><span class="line">MariaDB [ambari]&gt; source &#x2F;var&#x2F;lib&#x2F;ambari-server&#x2F;resources&#x2F;Ambari-DDL-MySQL-CREATE.sql</span><br><span class="line">MariaDB [ambari]&gt; quit</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>安装配置ambari-server</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"># master</span><br><span class="line">vi &#x2F;etc&#x2F;profile</span><br><span class="line">export buildNumber&#x3D;2.3.0.0</span><br><span class="line"></span><br><span class="line">ambari-server setup</span><br><span class="line">WARNING: SELinux is set to &#39;permissive&#39; mode and temporarily disabled.</span><br><span class="line">OK to continue [y&#x2F;n] (y)? </span><br><span class="line">Customize user account for ambari-server daemon [y&#x2F;n] (n)? n</span><br><span class="line">Checking JDK...</span><br><span class="line">[1] Oracle JDK 1.8 + Java Cryptography Extension (JCE) Policy Files 8</span><br><span class="line">[2] Oracle JDK 1.7 + Java Cryptography Extension (JCE) Policy Files 7</span><br><span class="line">[3] Custom JDK</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Enter choice (1): 3</span><br><span class="line">Path to JAVA_HOME: &#x2F;usr&#x2F;jdk64&#x2F;jdk1.8.0_77</span><br><span class="line">Validating JDK on Ambari Server...done.</span><br><span class="line">Completing setup...</span><br><span class="line">Configuring database... </span><br><span class="line">Enter advanced database configuration [y&#x2F;n] (n)? y</span><br><span class="line">Configuring database...</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Choose one of the following options:</span><br><span class="line">[1] - PostgreSQL (Embedded)</span><br><span class="line">[2] - Oracle</span><br><span class="line">[3] - MySQL</span><br><span class="line">[4] - PostgreSQL</span><br><span class="line">[5] - Microsoft SQL Server (Tech Preview)</span><br><span class="line">[6] - SQL Anywhere</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Enter choice (1): 3</span><br><span class="line">Hostname (localhost): </span><br><span class="line">Port (3306): </span><br><span class="line">Database name (ambari): </span><br><span class="line">Username (ambari): </span><br><span class="line">Enter Database Password (bigdata): </span><br><span class="line">Proceed with configuring remote database connection properties [y&#x2F;n] (y)? </span><br><span class="line">Ambari Server &#39;setup&#39; completed successfully.</span><br><span class="line"></span><br><span class="line">ambari-server setup --jdbc-db&#x3D;mysql --jdbc-driver&#x3D;&#x2F;usr&#x2F;share&#x2F;java&#x2F;mysql-connector-java.jar</span><br><span class="line"></span><br><span class="line">启动ambari-server服务</span><br><span class="line">ambari-server start</span><br><span class="line"></span><br><span class="line">登陆界面http:&#x2F;&#x2F;192.168.2.131:8080&#x2F;</span><br><span class="line">登录用户名密码为admin&#x2F;admin</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>配置ambari-agent</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># master &amp; slave1</span><br><span class="line">yum -y install ambari-agent</span><br><span class="line">vi &#x2F;etc&#x2F;ambari-agent&#x2F;conf&#x2F;ambari-agent.ini</span><br><span class="line">修改</span><br><span class="line">[server]</span><br><span class="line">hostname&#x3D; master</span><br><span class="line"></span><br><span class="line">重启服务</span><br><span class="line">ambari-agent restart</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>部署管理大数据集群</p>
+</blockquote>
+<p>登陆界面http://{ambari server IP Address}:8080/，用户名密码为admin/admin。接下来就可以启动安装向导，创建集群，安装服务.<br>主要需要修改的就是要将HDP的yum修改为实验环境中提供的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.2.100&#x2F;HDP&#x2F;centos7&#x2F;2.x&#x2F;updates&#x2F;2.3.0.0&#x2F;</span><br><span class="line">http:&#x2F;&#x2F;192.168.2.100&#x2F;HDP-UTILS-1.1.0.20&#x2F;repos&#x2F;centos7&#x2F;</span><br></pre></td></tr></table></figure>
+
+<h3 id="实践4-–-HDFS基本命令"><a href="#实践4-–-HDFS基本命令" class="headerlink" title="实践4 – HDFS基本命令"></a>实践4 – HDFS基本命令</h3><blockquote>
+<p>启动/关闭HDFS</p>
+</blockquote>
+<ol>
+<li>启动</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd $HADOOP_HOME</span><br><span class="line">sbin&#x2F;start-dfs.sh</span><br><span class="line">sbin&#x2F;start-yarn.sh</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>关闭<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sbin&#x2F;stop-yarn.sh</span><br><span class="line">sbin&#x2F;stop-dfs.sh</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>注意：</li>
+</ul>
+<ol>
+<li>以下命令使用$HADOOP_HOME/bin/hadoop</li>
+<li>以下操作也可以通过web方式操作</li>
+</ol>
+<blockquote>
+<p>ls - 浏览hdfs上目录</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -ls &#x2F; # 需要参看的hdfs上的目录</span><br><span class="line">hadoop fs -R &#x2F; # 递归查询</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>mkdir - 在hdfs上创建目录</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -mkdir &#x2F;a # 需要创建的目录，父目录需存在</span><br><span class="line">hadoop fs -mkdir -p &#x2F;a&#x2F;b # 多层目录</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>put - 把本地文件上传到hdfs</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -put &#x2F;path&#x2F;local&#x2F;file &#x2F;path&#x2F;on&#x2F;hdsf # 多个src用空格分隔,上传文件会自动创建hdfs目录</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>get - 下载hdfs上文件到本地</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -get &#x2F;path&#x2F;on&#x2F;hdfs&#x2F;file &#x2F;path&#x2F;local&#x2F;file # 多个src用空格分隔</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>text - 显示hdfs上文件（一般为文本文件）内容</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -text &#x2F;path&#x2F;on&#x2F;hdfs&#x2F;file</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>rm - 删除hdfs上文件或目录</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -rm &#x2F;path&#x2F;on&#x2F;hdfs&#x2F;file # 删除文件</span><br><span class="line">hadoop fs -rm -r &#x2F;path&#x2F;on&#x2F;hdfs # 删除目录</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>执行mapreduce作业</p>
+</blockquote>
+<ul>
+<li>注意：</li>
+</ul>
+<ol>
+<li>提交MapReduce作业前需启动yarn</li>
+<li>本次练习使用官方案例程序<br>$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0-cdh5.7.0.jar</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sbin&#x2F;start-yarn.sh</span><br><span class="line"></span><br><span class="line">hadoop fs -put &#x2F;path&#x2F;for&#x2F;data.txt &#x2F;input&#x2F;wc </span><br><span class="line">hadoop jar $HADOOP_HOME&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-examples-2.6.0-cdh5.7.0.jar wordcount  &#x2F;input&#x2F;wc&#x2F;data.txt &#x2F;output&#x2F;wc&#x2F;</span><br><span class="line">hadoop fs -text &#x2F;output&#x2F;wc&#x2F;part-r-0000* # part-r-0000*需根据具体文件名修改</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>Mr.Yu</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2020/06/26/Hadoop配置与应用-一/" target="_blank" title="Hadoop配置与应用(一)">http://yoursite.com/2020/06/26/Hadoop配置与应用-一/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/19/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hadoop配置与应用"><span class="nav-number">1.</span> <span class="nav-text">hadoop配置与应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实践1-–-单机配置hadoop"><span class="nav-number">1.1.</span> <span class="nav-text">实践1 – 单机配置hadoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实践2-–多主机配置Hadoop-HA集群"><span class="nav-number">1.2.</span> <span class="nav-text">实践2 –多主机配置Hadoop HA集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实践3-–-使用Ambari部署大数据集群"><span class="nav-number">1.3.</span> <span class="nav-text">实践3 – 使用Ambari部署大数据集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实践4-–-HDFS基本命令"><span class="nav-number">1.4.</span> <span class="nav-text">实践4 – HDFS基本命令</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2020 Do what you want All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Do what you want
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 Mr.Yu All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
