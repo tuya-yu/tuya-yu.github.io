@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据采集和清洗(一) | Inner peace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="数据分析" />
+  
+  
+  
+  
+  <meta name="description" content="数据下载 实践1 – 搭建Python开发环境 在Linux中安装配置Python3（多版本）   在centos下编译安装python3前，建议先将yum源更改为国内的yum源   安装编译所需的工具yum install -y gcc zlib zlib-devel libffi-devel openssl openssl-devel 下载并编译安装Python312345wget https">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据采集和清洗(一)">
+<meta property="og:url" content="https://yuzeyu.cn/2018/07/01/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E5%92%8C%E6%B8%85%E6%B4%97-%E4%B8%80/index.html">
+<meta property="og:site_name" content="Inner peace">
+<meta property="og:description" content="数据下载 实践1 – 搭建Python开发环境 在Linux中安装配置Python3（多版本）   在centos下编译安装python3前，建议先将yum源更改为国内的yum源   安装编译所需的工具yum install -y gcc zlib zlib-devel libffi-devel openssl openssl-devel 下载并编译安装Python312345wget https">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-07-01T10:54:00.000Z">
+<meta property="article:modified_time" content="2020-07-01T10:54:55.895Z">
+<meta property="article:author" content="Mr.Yu">
+<meta property="article:tag" content="数据分析">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Inner peace" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/yu.png">
+  <link rel="apple-touch-icon" href="/css/images/yu.png">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("/css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("/css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("/css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/yu.png">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-数据采集和清洗-一" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      数据采集和清洗(一)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/07/01/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E5%92%8C%E6%B8%85%E6%B4%97-%E4%B8%80/" class="article-date">
+	  <time datetime="2018-07-01T10:54:00.000Z" itemprop="datePublished">2018-07-01</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://pan.baidu.com/s/1RIUmSCQoH2ruM8waVmg53g" target="_blank" rel="noopener">数据下载</a></p>
+<h2 id="实践1-–-搭建Python开发环境"><a href="#实践1-–-搭建Python开发环境" class="headerlink" title="实践1 – 搭建Python开发环境"></a>实践1 – 搭建Python开发环境</h2><blockquote>
+<p>在Linux中安装配置Python3（多版本）</p>
+</blockquote>
+<ul>
+<li>在centos下编译安装python3前，建议先将yum源更改为国内的yum源</li>
+</ul>
+<ol>
+<li>安装编译所需的工具<br><code>yum install -y gcc zlib zlib-devel libffi-devel openssl openssl-devel</code></li>
+<li>下载并编译安装Python3<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;www.python.org&#x2F;ftp&#x2F;python&#x2F;3.6.2&#x2F;Python-3.6.2.tgz</span><br><span class="line">tar -xvf Python-3.6.2.tgz </span><br><span class="line">cd Python-3.6.2</span><br><span class="line">.&#x2F;configure --with-ssl</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></li>
+<li>检查<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3</span><br><span class="line">pip3</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用Virtualenv创建独立的Python运行环境</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>pip安装建议使用国内的pypi源，否则经常会因为网络超时导致模块安装失败</li>
+</ul>
+<p>1.安装virtualenv<br><code>pip3 install -i https://pypi.doubanio.com/simple/ virtualenv</code><br>2. 创建python虚拟环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir myspace #工作目录</span><br><span class="line">cd myspace</span><br><span class="line">virtualenv -p python3 venv</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>激活python虚机环境<br><code>. venv/bin/activate</code></li>
+<li>退出python虚机环境<br><code>deactivate</code></li>
+</ol>
+<h2 id="实践2-–-urllib和Requests的使用"><a href="#实践2-–-urllib和Requests的使用" class="headerlink" title="实践2 – urllib和Requests的使用"></a>实践2 – urllib和Requests的使用</h2><blockquote>
+<p>urllib使用</p>
+</blockquote>
+<ol>
+<li>发起GET请求<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># http_get.py</span><br><span class="line">from urllib import request</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">response &#x3D; request.urlopen(&quot;http:&#x2F;&#x2F;www.baidu.com&#x2F;&quot;)</span><br><span class="line">print(response.read())</span><br></pre></td></tr></table></figure></li>
+<li>发起带参数的请求<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># http_params.py</span><br><span class="line">from urllib import request, parse</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url &#x3D; &#39;http:&#x2F;&#x2F;www.baidu.com&#x2F;s?&#39;</span><br><span class="line">params &#x3D; &#123;&#39;word&#39;: &#39;Python爬虫&#39;,</span><br><span class="line">          &#39;tn&#39;: &#39;baiduhome_pg&#39;,</span><br><span class="line">          &#39;ie&#39;: &#39;utf-8&#39;&#125;</span><br><span class="line">url &#x3D; url + parse.urlencode(params)</span><br><span class="line"># print(url)</span><br><span class="line">with request.urlopen(url) as response:</span><br><span class="line">    with open(&quot;response.html&quot;, &quot;wb&quot;) as file:</span><br><span class="line">        file.write(response.read())</span><br></pre></td></tr></table></figure></li>
+<li>发起POST请求<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># http_post.py</span><br><span class="line">from urllib import request,parse</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">data &#x3D; parse.urlencode(&#123;&#39;terms&#39;: &#39;here is test&#39;&#125;).encode()</span><br><span class="line">req &#x3D; request.Request(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;post?q&#x3D;Python&#39;, data&#x3D;data)</span><br><span class="line">with request.urlopen(req) as response:</span><br><span class="line">    print(response.read())</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>requests使用</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>使用前需安装Requests模块<br><code>pip install -i https://pypi.doubanio.com/simple/ requests</code></li>
+<li>文档 <a href="https://2.python-requests.org//zh_CN/latest/index.html" target="_blank" rel="noopener">https://2.python-requests.org//zh_CN/latest/index.html</a></li>
+</ul>
+<ol>
+<li>发起http请求<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># req_http.py</span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 发起get请求，并传递参数</span><br><span class="line">r1 &#x3D; requests.get(&#39;https:&#x2F;&#x2F;httpbin.org&#x2F;get&#39;, params&#x3D;&#123;&#39;terms&#39;: &#39;here is test&#39;&#125;)</span><br><span class="line">print(r1.url)</span><br><span class="line">print(r1.status_code)</span><br><span class="line">print(r1.content)</span><br><span class="line"># 发起post请求</span><br><span class="line">r2 &#x3D; requests.post(&#39;https:&#x2F;&#x2F;httpbin.org&#x2F;post&#39;, data&#x3D;&#123;&#39;terms&#39;: &#39;here is test&#39;&#125;)</span><br><span class="line">print(r2.content)</span><br></pre></td></tr></table></figure></li>
+<li>常见设置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># req_header.py</span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 自定义请求头</span><br><span class="line">headers &#x3D; &#123;&#39;user-agent&#39;: &#39;Mozilla&#x2F;5.0&#39;&#125;</span><br><span class="line">r1 &#x3D; requests.get(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;headers&#39;, headers&#x3D;headers)</span><br><span class="line">print(r1.text)</span><br><span class="line"></span><br><span class="line"># 指定Cookie</span><br><span class="line">cookies &#x3D; &#123;&#39;from-my&#39;: &#39;browser&#39;&#125;</span><br><span class="line">r2 &#x3D; requests.get(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;cookies&#39;, cookies&#x3D;cookies)</span><br><span class="line">print(r2.text)</span><br><span class="line"></span><br><span class="line"># 设置超时</span><br><span class="line">r3 &#x3D; requests.get(&#39;https:&#x2F;&#x2F;www.baidu.com&#39;, timeout&#x3D;5)</span><br><span class="line"></span><br><span class="line"># 设置代理 西刺https:&#x2F;&#x2F;www.xicidaili.com&#x2F;</span><br><span class="line">proxy &#x3D; &#123;</span><br><span class="line">    &#39;http&#39;: &#39;http:&#x2F;&#x2F;112.85.170.175:9999&#39;,</span><br><span class="line">    &#39;https&#39;: &#39;https:&#x2F;&#x2F;118.190.73.168:808&#39;,</span><br><span class="line">&#125;</span><br><span class="line">r4 &#x3D; requests.get(&#39;http:&#x2F;&#x2F;www.kuaidaili.com&#x2F;free&#x2F;&#39;, proxies&#x3D;proxy, timeout&#x3D;2)</span><br><span class="line">print(r4.content)</span><br><span class="line"></span><br><span class="line"># Session</span><br><span class="line">s &#x3D; requests.Session()</span><br><span class="line">s.cookies &#x3D; requests.utils.cookiejar_from_dict(&#123;&quot;a&quot;: &quot;c&quot;&#125;)</span><br><span class="line">r5 &#x3D; s.get(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;cookies&#39;)</span><br><span class="line">print(r5.text)</span><br><span class="line">r5 &#x3D; s.get(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;cookies&#39;)</span><br><span class="line">print(r5.text)</span><br></pre></td></tr></table></figure>
+<h2 id="实践3-–-Beautiful-Soup的使用"><a href="#实践3-–-Beautiful-Soup的使用" class="headerlink" title="实践3 – Beautiful Soup的使用"></a>实践3 – Beautiful Soup的使用</h2></li>
+</ol>
+<ul>
+<li>使用前需安装beautiful soup4模块<br><code>pip install -i https://pypi.doubanio.com/simple/ beautifulsoup4</code></li>
+<li>文档: <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/" target="_blank" rel="noopener">https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/</a><blockquote>
+<p>使用bs4解析网页</p>
+</blockquote>
+</li>
+</ul>
+<ol>
+<li>基于标签Tag查找<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># douban_top250.py</span><br><span class="line">import requests</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">headers &#x3D; &#123;&#39;user-agent&#39;: &#39;Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;75.0.3770.100 Safari&#x2F;537.36&#39;&#125;</span><br><span class="line">rsq &#x3D; requests.get(&#39;https:&#x2F;&#x2F;movie.douban.com&#x2F;top250&#39;, headers&#x3D;headers)</span><br><span class="line">html &#x3D; rsq.text</span><br><span class="line">soup &#x3D; BeautifulSoup(html, &#39;html.parser&#39;)</span><br><span class="line"></span><br><span class="line"># 基于标签查找</span><br><span class="line">divs &#x3D; soup.find_all(&#39;div&#39;, class_&#x3D;&#39;hd&#39;)</span><br><span class="line">for div in divs:</span><br><span class="line">    print(div.a.span.string)</span><br><span class="line"></span><br><span class="line">next_link &#x3D; soup.find(&#39;span&#39;, class_&#x3D;&#39;next&#39;)</span><br><span class="line">if next_link is not None:</span><br><span class="line">    print(next_link.a[&#39;href&#39;])</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<ol start="2">
+<li>基于CSS selector查找</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># douban_top250.py</span><br><span class="line">import requests</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">headers &#x3D; &#123;&#39;user-agent&#39;: &#39;Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;75.0.3770.100 Safari&#x2F;537.36&#39;&#125;</span><br><span class="line">rsq &#x3D; requests.get(&#39;https:&#x2F;&#x2F;movie.douban.com&#x2F;top250&#39;, headers&#x3D;headers)</span><br><span class="line">html &#x3D; rsq.text</span><br><span class="line">soup &#x3D; BeautifulSoup(html, &#39;html.parser&#39;)</span><br><span class="line"></span><br><span class="line"># CSS选择器</span><br><span class="line">div_css &#x3D; soup.select(&#39;.item a .title:first-child&#39;)</span><br><span class="line">for name in div_css:</span><br><span class="line">    print(name.get_text())</span><br><span class="line"></span><br><span class="line">link_css &#x3D; soup.select_one(&#39;.next a&#39;)</span><br><span class="line">if link_css is not None:</span><br><span class="line">    print(link_css[&#39;href&#39;])</span><br></pre></td></tr></table></figure>
+
+<h2 id="实践4-–-MongoDB基础"><a href="#实践4-–-MongoDB基础" class="headerlink" title="实践4 – MongoDB基础"></a>实践4 – MongoDB基础</h2><blockquote>
+<p>MongoDB数据库基本操作</p>
+</blockquote>
+<ol>
+<li>启动/连接数据库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;path&#x2F;for&#x2F;mongodb&#x2F;bin</span><br><span class="line">.&#x2F;mongod --dbpath &#x2F;path&#x2F;for&#x2F;data&#x2F;</span><br><span class="line">.&#x2F;mongo</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建数据库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use spider</span><br><span class="line">db</span><br><span class="line">show dbs</span><br><span class="line">db.dropDatabase()</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>创建集合</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.createCollection(&#39;douban&#39;)</span><br><span class="line">show collections</span><br><span class="line">db.douban.drop()</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>创建文档</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.douban.insert(&#123;&#39;title&#39;: &#39;豆瓣&#39;&#125;) # 如果集合douban不存在也会自动创建</span><br><span class="line">db.douban.find()</span><br><span class="line">db.douban.update(&#123;&#39;title&#39;: &#39;豆瓣&#39;&#125;, &#123;$set:&#123;&#39;title&#39;: &#39;豆瓣爬虫&#39;&#125;&#125;)</span><br><span class="line">db.douban.remove(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>pymongo操作数据库</p>
+</blockquote>
+<ul>
+<li>使用前需安装pymongo模块</li>
+</ul>
+<p><code>pip install -i https://pypi.doubanio.com/simple/ pymongo</code></p>
+<ol>
+<li>pymongo操作数据库</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import pymongo</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">client &#x3D; pymongo.MongoClient(host&#x3D;&quot;127.0.0.1&quot;, port&#x3D;27017)</span><br><span class="line">db &#x3D; client[&quot;jobs&quot;]</span><br><span class="line">collection &#x3D; db[&quot;jobs_bigdata&quot;]</span><br><span class="line">data &#x3D; &#123; &quot;title&quot;: &quot;肖申克的救赎&quot;, &quot;star&quot;: 1000, &quot;url&quot;: &quot;https:&#x2F;&#x2F;movie.douban.com&#x2F;subject&#x2F;1292052&#x2F;&quot; &#125;</span><br><span class="line">doc &#x3D; collection.insert_one(data)</span><br><span class="line">print(doc.inserted_id)</span><br><span class="line"></span><br><span class="line">for x in collection.find():</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="实践5-–-爬取动态网页"><a href="#实践5-–-爬取动态网页" class="headerlink" title="实践5 – 爬取动态网页"></a>实践5 – 爬取动态网页</h2><blockquote>
+<p>爬取豆瓣电影Top250</p>
+</blockquote>
+<ul>
+<li>使用前需安装selenium模块</li>
+</ul>
+<p><code>pip install -i https://pypi.doubanio.com/simple/ selenium</code></p>
+<ul>
+<li>文档： <a href="https://selenium-python-zh.readthedocs.io/en/latest/" target="_blank" rel="noopener">https://selenium-python-zh.readthedocs.io/en/latest/</a></li>
+<li>下载Chrome WebDriver：<a href="http://chromedriver.storage.googleapis.com/index.html" target="_blank" rel="noopener">http://chromedriver.storage.googleapis.com/index.html</a></li>
+</ul>
+<ol>
+<li>模拟登录</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># login.py</span><br><span class="line">from selenium import webdriver</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">browser &#x3D; webdriver.Chrome(executable_path&#x3D;&#39;f:&#x2F;bigdata&#x2F;chromedriver.exe&#39;)</span><br><span class="line">browser.get(&#39;http:&#x2F;&#x2F;www.baidu.com&#39;)</span><br><span class="line">elem &#x3D; browser.find_element_by_id(&quot;kw&quot;)</span><br><span class="line">elem.clear()</span><br><span class="line">elem.send_keys(&#39;python爬虫&#39;)</span><br><span class="line">btn &#x3D; browser.find_element_by_id(&quot;su&quot;)</span><br><span class="line">btn.click()</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>加载js</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># pulldown.py</span><br><span class="line">from selenium import webdriver</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">browser &#x3D; webdriver.Chrome(executable_path&#x3D;&#39;f:&#x2F;bigdata&#x2F;chromedriver.exe&#39;)</span><br><span class="line">browser.get(&#39;https:&#x2F;&#x2F;www.oschina.net&#x2F;home&#x2F;login?goto_page&#x3D;https%3A%2F%2Fwww.oschina.net%2Fblog&#39;)</span><br><span class="line"># 页面未加载完成会导致无法找到对象</span><br><span class="line">time.sleep(5)</span><br><span class="line">browser.find_element_by_css_selector(&quot;#userMail&quot;).send_keys(&quot;******&quot;)</span><br><span class="line">browser.find_element_by_css_selector(&quot;#userPassword&quot;).send_keys(&quot;******&quot;)</span><br><span class="line">browser.find_element_by_css_selector(&quot;.btn.btn-green.block.btn-login&quot;).click()</span><br><span class="line"></span><br><span class="line">for i in range(3):</span><br><span class="line">    script &#x3D; &quot;window.scrollTo(0, document.body.scrollHeight); var lenOfPage&#x3D;document.body.scrollHeight; return lenOfPage;&quot;</span><br><span class="line">    browser.execute_script(script)</span><br><span class="line">    time.sleep(3)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>Mr.Yu</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2018/07/01/数据采集和清洗-一/" target="_blank" title="数据采集和清洗(一)">https://yuzeyu.cn/2018/07/01/数据采集和清洗-一/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/01/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E5%92%8C%E6%B8%85%E6%B4%97-%E4%BA%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          数据采集和清洗(二)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/27/centos7-%E5%AE%89%E8%A3%85mysql5-7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">centos7 安装mysql5.7</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实践1-–-搭建Python开发环境"><span class="nav-number">1.</span> <span class="nav-text">实践1 – 搭建Python开发环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践2-–-urllib和Requests的使用"><span class="nav-number">2.</span> <span class="nav-text">实践2 – urllib和Requests的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践3-–-Beautiful-Soup的使用"><span class="nav-number">3.</span> <span class="nav-text">实践3 – Beautiful Soup的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践4-–-MongoDB基础"><span class="nav-number">4.</span> <span class="nav-text">实践4 – MongoDB基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践5-–-爬取动态网页"><span class="nav-number">5.</span> <span class="nav-text">实践5 – 爬取动态网页</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2020 Inner peace All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Inner peace
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 Mr.Yu All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

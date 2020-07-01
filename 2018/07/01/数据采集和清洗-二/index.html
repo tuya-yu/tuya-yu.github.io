@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据采集和清洗(二) | Inner peace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="数据分析" />
+  
+  
+  
+  
+  <meta name="description" content="实践6 – Scrapy安装和配置 在Linux中安装Scrapy   激活Python虚拟环境 安装Twisted  1234wget https:&#x2F;&#x2F;twistedmatrix.com&#x2F;Releases&#x2F;Twisted&#x2F;17.1&#x2F;Twisted-17.1.0.tar.bz2tar -jxvf Twisted-17.1.0.tar.bz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据采集和清洗(二)">
+<meta property="og:url" content="https://yuzeyu.cn/2018/07/01/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E5%92%8C%E6%B8%85%E6%B4%97-%E4%BA%8C/index.html">
+<meta property="og:site_name" content="Inner peace">
+<meta property="og:description" content="实践6 – Scrapy安装和配置 在Linux中安装Scrapy   激活Python虚拟环境 安装Twisted  1234wget https:&#x2F;&#x2F;twistedmatrix.com&#x2F;Releases&#x2F;Twisted&#x2F;17.1&#x2F;Twisted-17.1.0.tar.bz2tar -jxvf Twisted-17.1.0.tar.bz">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-07-01T10:55:00.000Z">
+<meta property="article:modified_time" content="2020-07-01T10:55:55.490Z">
+<meta property="article:author" content="Mr.Yu">
+<meta property="article:tag" content="数据分析">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Inner peace" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/yu.png">
+  <link rel="apple-touch-icon" href="/css/images/yu.png">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("/css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("/css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("/css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/yu.png">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-数据采集和清洗-二" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      数据采集和清洗(二)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/07/01/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E5%92%8C%E6%B8%85%E6%B4%97-%E4%BA%8C/" class="article-date">
+	  <time datetime="2018-07-01T10:55:00.000Z" itemprop="datePublished">2018-07-01</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="实践6-–-Scrapy安装和配置"><a href="#实践6-–-Scrapy安装和配置" class="headerlink" title="实践6 – Scrapy安装和配置"></a>实践6 – Scrapy安装和配置</h2><blockquote>
+<p>在Linux中安装Scrapy</p>
+</blockquote>
+<ol>
+<li>激活Python虚拟环境</li>
+<li>安装Twisted</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;twistedmatrix.com&#x2F;Releases&#x2F;Twisted&#x2F;17.1&#x2F;Twisted-17.1.0.tar.bz2</span><br><span class="line">tar -jxvf Twisted-17.1.0.tar.bz2</span><br><span class="line">cd Twisted-17.1.0</span><br><span class="line">python3 setup.py install</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>安装scrapy</li>
+</ol>
+<p><code>pip install -i https://pypi.doubanio.com/simple/ scrapy3</code></p>
+<blockquote>
+<p>创建Scrapy项目</p>
+</blockquote>
+<ol>
+<li>创建Scrapy项目</li>
+</ol>
+<p><code>scrapy startproject douban</code></p>
+<ol start="2">
+<li>增加第一个爬虫</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd douban</span><br><span class="line">scrapy genspider douban_spider movie.douban.com #域名</span><br></pre></td></tr></table></figure>
+
+<h3 id="实践7-–-使用Scrapy爬取豆瓣电影短评"><a href="#实践7-–-使用Scrapy爬取豆瓣电影短评" class="headerlink" title="实践7 – 使用Scrapy爬取豆瓣电影短评"></a>实践7 – 使用Scrapy爬取豆瓣电影短评</h3><blockquote>
+<ul>
+<li>scrapy爬取4步骤：<br>1、新建项目<br>2、明确目标<br>3、制作爬虫<br>4、存储内容</li>
+</ul>
+</blockquote>
+<ol>
+<li>修改setting设置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Crawl responsibly by identifying yourself (and your website) on the user-agent</span><br><span class="line">USER_AGENT &#x3D; &#39;Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;74.0.3729.169 Safari&#x2F;537.36&#39;</span><br><span class="line"></span><br><span class="line"># Obey robots.txt rules</span><br><span class="line">ROBOTSTXT_OBEY &#x3D; False</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>明确目标</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># items.py</span><br><span class="line">import scrapy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class DoubanItem(scrapy.Item):</span><br><span class="line">    serial_number &#x3D; scrapy.Field()</span><br><span class="line">    movie_name &#x3D; scrapy.Field()</span><br><span class="line">    introduce &#x3D; scrapy.Field()</span><br><span class="line">    stars &#x3D; scrapy.Field()</span><br><span class="line">    evaluate &#x3D; scrapy.Field()</span><br><span class="line">    describe &#x3D; scrapy.Field()</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>制作爬虫</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># douban_spider.py</span><br><span class="line">import scrapy</span><br><span class="line">from douban.items import DoubanItem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class DoubanSpiderSpider(scrapy.Spider):</span><br><span class="line">    name &#x3D; &#39;douban_spider&#39;</span><br><span class="line">    allowed_domains &#x3D; [&#39;movie.douban.com&#39;]</span><br><span class="line">    start_urls &#x3D; [&#39;https:&#x2F;&#x2F;movie.douban.com&#x2F;top250&#39;]</span><br><span class="line"></span><br><span class="line">    def parse(self, response):</span><br><span class="line">        # 处理当前页</span><br><span class="line">        movie_list &#x3D; response.xpath(&quot;&#x2F;&#x2F;ol[@class&#x3D;&#39;grid_view&#39;]&#x2F;li&quot;)</span><br><span class="line">        for item in movie_list:</span><br><span class="line">            douban_item &#x3D; DoubanItem()</span><br><span class="line">            douban_item[&quot;serial_number&quot;] &#x3D; item.xpath(&quot;.&#x2F;&#x2F;div[@class&#x3D;&#39;pic&#39;]&#x2F;em&#x2F;text()&quot;).extract_first()</span><br><span class="line">            douban_item[&quot;movie_name&quot;] &#x3D; item.xpath(&quot;.&#x2F;&#x2F;div[@class&#x3D;&#39;info&#39;]&#x2F;div[@class&#x3D;&#39;hd&#39;]&#x2F;a&#x2F;span[1]&#x2F;text()&quot;).extract_first()</span><br><span class="line">            content &#x3D; item.xpath(&quot;.&#x2F;&#x2F;div[@class&#x3D;&#39;info&#39;]&#x2F;div[@class&#x3D;&#39;bd&#39;]&#x2F;p[1]&#x2F;text()&quot;).extract()</span><br><span class="line">            content_s &#x3D; &quot;&quot;</span><br><span class="line">            for i_content in content:</span><br><span class="line">                line &#x3D; &quot;&quot;.join(i_content.split())</span><br><span class="line">                content_s &#x3D; content_s + line + &quot;&#x2F;&quot;</span><br><span class="line">            douban_item[&quot;introduce&quot;] &#x3D; content_s</span><br><span class="line">            douban_item[&quot;stars&quot;] &#x3D; item.xpath(&quot;.&#x2F;&#x2F;div[@class&#x3D;&#39;info&#39;]&#x2F;&#x2F;div[@class&#x3D;&#39;star&#39;]&#x2F;span[@class&#x3D;&#39;rating_num&#39;]&#x2F;text()&quot;).extract_first()</span><br><span class="line">            douban_item[&quot;evaluate&quot;] &#x3D; item.xpath(&quot;.&#x2F;&#x2F;div[@class&#x3D;&#39;info&#39;]&#x2F;&#x2F;div[@class&#x3D;&#39;star&#39;]&#x2F;span[4]&#x2F;text()&quot;).extract_first()</span><br><span class="line">            douban_item[&quot;describe&quot;] &#x3D; item.xpath(&quot;.&#x2F;&#x2F;div[@class&#x3D;&#39;info&#39;]&#x2F;div[@class&#x3D;&#39;bd&#39;]&#x2F;&#x2F;span[@class&#x3D;&#39;inq&#39;]&#x2F;text()&quot;).extract_first()</span><br><span class="line"></span><br><span class="line">            yield douban_item</span><br><span class="line"></span><br><span class="line">        # 找到下一页</span><br><span class="line">        next_link &#x3D; response.xpath(&quot;&#x2F;&#x2F;span[@class&#x3D;&#39;next&#39;]&#x2F;link&#x2F;@href&quot;).extract()</span><br><span class="line">        if next_link:</span><br><span class="line">            next_link &#x3D; next_link[0]</span><br><span class="line">            yield scrapy.Request(&quot;https:&#x2F;&#x2F;movie.douban.com&#x2F;top250&quot; + next_link, callback&#x3D;self.parse)</span><br></pre></td></tr></table></figure>
+
+<p>为了让执行爬虫更方便，可以添加一个脚本完成以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy crawl douban_spider</span><br></pre></td></tr></table></figure>
+
+
+<p>新建 <a href="http://main.py" target="_blank" rel="noopener">main.py</a> 文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># main.py</span><br><span class="line">from scrapy import cmdline</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cmdline.execute(&#39;scrapy crawl douban_spider&#39;.split())</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>存储内容</li>
+</ol>
+<p>在setting.py中添加数据库配置信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mongo_host &#x3D; &#39;127.0.0.1&#39;</span><br><span class="line">mongo_port &#x3D; 27017</span><br><span class="line">mongo_db_name &#x3D; &#39;douban&#39;</span><br><span class="line">mongo_db_collection &#x3D; &#39;douban_movie&#39;</span><br></pre></td></tr></table></figure>
+
+
+<p>在pipelines.py中添加自己的pipeline</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import pymongo</span><br><span class="line">from douban.settings import mongo_host,mongo_port,mongo_db_name,mongo_db_collection</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class DoubanPipeline(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        host &#x3D; mongo_host</span><br><span class="line">        port &#x3D; mongo_port</span><br><span class="line">        dbname &#x3D; mongo_db_name</span><br><span class="line">        sheetname &#x3D; mongo_db_collection</span><br><span class="line">        client &#x3D; pymongo.MongoClient(host&#x3D;host, port&#x3D;port)</span><br><span class="line">        mydb &#x3D; client[dbname]</span><br><span class="line">        self.post &#x3D; mydb[sheetname]</span><br><span class="line"></span><br><span class="line">    def process_item(self, item, spider):</span><br><span class="line">        data &#x3D; dict(item)</span><br><span class="line">        self.post.insert(data)</span><br><span class="line">        return item</span><br></pre></td></tr></table></figure>
+
+
+<p>在setting.py中开启自己定义的pipeline</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Configure item pipelines</span><br><span class="line">ITEM_PIPELINES &#x3D; &#123;</span><br><span class="line">   &#39;douban.pipelines.DoubanPipeline&#39;: 300,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>Mr.Yu</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2018/07/01/数据采集和清洗-二/" target="_blank" title="数据采集和清洗(二)">https://yuzeyu.cn/2018/07/01/数据采集和清洗-二/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/01/scrapy%E5%AE%9E%E6%88%98-%E4%B8%80-%E7%9F%A5%E4%B9%8E%E9%97%AE%E7%AD%94/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          scrapy实战(一)--知乎问答
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/01/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E5%92%8C%E6%B8%85%E6%B4%97-%E4%B8%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数据采集和清洗(一)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实践6-–-Scrapy安装和配置"><span class="nav-number">1.</span> <span class="nav-text">实践6 – Scrapy安装和配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实践7-–-使用Scrapy爬取豆瓣电影短评"><span class="nav-number">1.1.</span> <span class="nav-text">实践7 – 使用Scrapy爬取豆瓣电影短评</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2020 Inner peace All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Inner peace
+          </div>
+          <div class="panel-body">
+            Copyright © 2020 Mr.Yu All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
