@@ -500,6 +500,298 @@ hostnamectl set-hostname master(centos6 使用vim /etc/sysconfig/network)
 
 
   
+    <article id="post-机森林"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2016/07/13/%E6%9C%BA%E6%A3%AE%E6%9E%97/">随机森林</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2016/07/13/%E6%9C%BA%E6%A3%AE%E6%9E%97/" class="article-date">
+	  <time datetime="2016-07-13T12:23:00.000Z" itemprop="datePublished">2016-07-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          Boosting12import numpy as npimport matplotlib.pyplot as plt
+
+
+123from sklearn import datasetsX, y = datasets.make_moons(n_samples=500, noise=0.3, random_state=666)
+
+
+123plt.scatter(X[y==0,0], X[y==0,1])plt.scatter(X[y==1,0], X[y==1,1])plt.show()
+
+...
+        </p>
+        <p class="article-more-link">
+          <a href="/2016/07/13/%E6%9C%BA%E6%A3%AE%E6%9E%97/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-SSO"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2016/07/13/SSO/">LASSO</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2016/07/13/SSO/" class="article-date">
+	  <time datetime="2016-07-13T12:15:00.000Z" itemprop="datePublished">2016-07-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          LASSO12import numpy as npimport matplotlib.pyplot as plt
+
+
+1234np.random.seed(42)x = np.random.uniform(-3.0, 3.0, size=100)X = x.reshape(-1, 1)y = 0.5 * x + 3 + np.random.normal(0, 1, size=100)
+
+
+12plt.scatter(x, y)plt.show()
+
+
+
+1234from sklearn.m...
+        </p>
+        <p class="article-more-link">
+          <a href="/2016/07/13/SSO/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-验证"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2016/07/13/%E9%AA%8C%E8%AF%81/">交叉验证</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2016/07/13/%E9%AA%8C%E8%AF%81/" class="article-date">
+	  <time datetime="2016-07-13T12:09:00.000Z" itemprop="datePublished">2016-07-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          Validation 和 Cross Validation12import numpy as npfrom sklearn import datasets
+
+
+123digits = datasets.load_digits()X = digits.datay = digits.target
+
+测试train_test_split12from sklearn.model_selection import train_test_splitX_train, X_test, y_train, y...
+        </p>
+        <p class="article-more-link">
+          <a href="/2016/07/13/%E9%AA%8C%E8%AF%81/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-式回归和Pipeline"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2016/07/13/%E5%BC%8F%E5%9B%9E%E5%BD%92%E5%92%8CPipeline/">多项式回归和Pipeline</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2016/07/13/%E5%BC%8F%E5%9B%9E%E5%BD%92%E5%92%8CPipeline/" class="article-date">
+	  <time datetime="2016-07-13T12:06:00.000Z" itemprop="datePublished">2016-07-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          scikit-learn中的多项式回归和Pipeline12import numpy as np import matplotlib.pyplot as plt
+
+
+123x = np.random.uniform(-3, 3, size=100)X = x.reshape(-1, 1)y = 0.5 * x**2 + x + 2 + np.random.normal(0, 1, 100)
+
+
+1from sklearn.preprocessing import PolynomialFea...
+        </p>
+        <p class="article-more-link">
+          <a href="/2016/07/13/%E5%BC%8F%E5%9B%9E%E5%BD%92%E5%92%8CPipeline/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-A-IN-3D"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2016/07/13/A-IN-3D/">PCA-IN-3D</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2016/07/13/A-IN-3D/" class="article-date">
+	  <time datetime="2016-07-13T12:01:00.000Z" itemprop="datePublished">2016-07-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          可视化三维样本数据点的PCA过程1234567import numpy as npfrom mpl_toolkits import mplot3dimport matplotlib.pyplot as plt# 在三维空间随机生成100个样本点np.random.seed(8888)X_random = np.random.random(size=(100, 3))
+
+
+123ax = plt.axes(projection='3d')ax.scatter3D(X_random[:,0],...
+        </p>
+        <p class="article-more-link">
+          <a href="/2016/07/13/A-IN-3D/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
     <article id="post-树回归"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
@@ -558,232 +850,11 @@ hostnamectl set-hostname master(centos6 使用vim /etc/sysconfig/network)
 
 
   
-    <article id="post-SVM"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2016/07/13/SVM/">SVM</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2016/07/13/SVM/" class="article-date">
-	  <time datetime="2016-07-13T08:03:00.000Z" itemprop="datePublished">2016-07-13</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          scikit-learn中的SVM12import numpy as npimport matplotlib.pyplot as plt
-
-
-123456789from sklearn import datasetsiris = datasets.load_iris()X = iris.datay = iris.targetX = X[y&lt;2,:2]y = y[y&lt;2]
-
-
-123plt.scatter(X[y==0,0], X[y==0,1], color='red')plt...
-        </p>
-        <p class="article-more-link">
-          <a href="/2016/07/13/SVM/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-使用PCA去噪"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2016/07/13/%E4%BD%BF%E7%94%A8PCA%E5%8E%BB%E5%99%AA/">使用PCA去噪</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2016/07/13/%E4%BD%BF%E7%94%A8PCA%E5%8E%BB%E5%99%AA/" class="article-date">
-	  <time datetime="2016-07-13T07:30:00.000Z" itemprop="datePublished">2016-07-13</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110#!&#x2F;usr&#x2F;bin&#x2F...
-        </p>
-        <p class="article-more-link">
-          <a href="/2016/07/13/%E4%BD%BF%E7%94%A8PCA%E5%8E%BB%E5%99%AA/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-梯度下降法"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2016/07/13/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/">梯度下降法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2016/07/13/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/" class="article-date">
-	  <time datetime="2016-07-13T05:51:00.000Z" itemprop="datePublished">2016-07-13</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          PCA和梯度法核心思想&emsp;&emsp;其实严格来说，梯度下降法不是机器学习算法，是一种基于搜索的最优方法。
-&emsp;&emsp;主要作用是最小化一个损失函数。相对应的，梯度上升法就是最大化一个效用函数。
-关于梯度下降算法的直观理解，我们以一个人下山为例。按照梯度下降算法的思想，它将按如下操作达到最低点：
-第一步，明确自己现在所处的位置
-第二步，找到相对于该位置而言下降最快的方向
-第三步， 沿着第二步找到的方向走一小步，到达一个新的位置，此时的位置肯定比原来低
-第四部， 回到第一...
-        </p>
-        <p class="article-more-link">
-          <a href="/2016/07/13/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-KNN"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2016/07/01/KNN/">KNN</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2016/07/01/KNN/" class="article-date">
-	  <time datetime="2016-07-01T11:03:00.000Z" itemprop="datePublished">2016-07-01</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          KNN核心思想&emsp;&emsp;如果一个样本在特征空间中的K个最相邻的样本中的大多数属于某一个类别，则该样本也属于这个类别，并具有这个类别上样本的特性。&emsp;&emsp;该方法在确定分类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。KNN方法在类别决策时，只与极少量的相邻样本有关。由于KNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，KNN方法较其他方法更为适合
-算法流程总体来说，K...
-        </p>
-        <p class="article-more-link">
-          <a href="/2016/07/01/KNN/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
   </nav>
 
 </section>

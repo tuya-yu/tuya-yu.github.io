@@ -11,18 +11,23 @@
   
   
   
-  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+  <meta name="description" content="使用PCA去噪12import numpy as npimport matplotlib.pyplot as plt   123X &#x3D; np.empty((100, 2))X[:,0] &#x3D; np.random.uniform(0., 100., size&#x3D;100)X[:,1] &#x3D; 0.75 * X[:,0] + 3. + np.random.normal(0, 5, size&#x3D;100)   12p">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用PCA去噪">
 <meta property="og:url" content="https://yuzeyu.cn/2016/07/13/%E4%BD%BF%E7%94%A8PCA%E5%8E%BB%E5%99%AA/index.html">
 <meta property="og:site_name" content="Inner peace">
-<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:description" content="使用PCA去噪12import numpy as npimport matplotlib.pyplot as plt   123X &#x3D; np.empty((100, 2))X[:,0] &#x3D; np.random.uniform(0., 100., size&#x3D;100)X[:,1] &#x3D; 0.75 * X[:,0] + 3. + np.random.normal(0, 5, size&#x3D;100)   12p">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yuzeyu.cn/css/images/08-PCA-for-Noise-Reduction_files/08-PCA-for-Noise-Reduction_4_0.png">
+<meta property="og:image" content="https://yuzeyu.cn/css/images/08-PCA-for-Noise-Reduction_files/08-PCA-for-Noise-Reduction_6_0.png">
+<meta property="og:image" content="https://yuzeyu.cn/css/images/08-PCA-for-Noise-Reduction_files/08-PCA-for-Noise-Reduction_13_0.png">
+<meta property="og:image" content="https://yuzeyu.cn/css/images/08-PCA-for-Noise-Reduction_files/08-PCA-for-Noise-Reduction_15_0.png">
 <meta property="article:published_time" content="2016-07-13T07:30:00.000Z">
-<meta property="article:modified_time" content="2020-07-13T07:31:28.741Z">
+<meta property="article:modified_time" content="2020-07-13T11:57:44.302Z">
 <meta property="article:author" content="Mr.Yu">
 <meta property="article:tag" content="PCA">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuzeyu.cn/css/images/08-PCA-for-Noise-Reduction_files/08-PCA-for-Noise-Reduction_4_0.png">
   
     <link rel="alternate" href="/atom.xml" title="Inner peace" type="application/atom+xml">
   
@@ -207,7 +212,52 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># coding: utf-8</span><br><span class="line"></span><br><span class="line"># ## 使用PCA去噪</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[1]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[2]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">X &#x3D; np.empty((100, 2))</span><br><span class="line">X[:,0] &#x3D; np.random.uniform(0., 100., size&#x3D;100)</span><br><span class="line">X[:,1] &#x3D; 0.75 * X[:,0] + 3. + np.random.normal(0, 5, size&#x3D;100)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[3]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.scatter(X[:,0], X[:,1])</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[4]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">from sklearn.decomposition import PCA</span><br><span class="line"></span><br><span class="line">pca &#x3D; PCA(n_components&#x3D;1)</span><br><span class="line">pca.fit(X)</span><br><span class="line">X_reduction &#x3D; pca.transform(X)</span><br><span class="line">X_restore &#x3D; pca.inverse_transform(X_reduction)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[5]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.scatter(X_restore[:,0], X_restore[:,1])</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 降维的过程可以理解成是去噪。</span><br><span class="line"></span><br><span class="line"># ### 手写识别的例子</span><br><span class="line"></span><br><span class="line"># In[6]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">from sklearn import datasets</span><br><span class="line"></span><br><span class="line">digits &#x3D; datasets.load_digits()</span><br><span class="line">X &#x3D; digits.data</span><br><span class="line">y &#x3D; digits.target</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[7]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">noisy_digits &#x3D; X + np.random.normal(0, 4, size&#x3D;X.shape)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[8]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">example_digits &#x3D; noisy_digits[y&#x3D;&#x3D;0,:][:10]</span><br><span class="line">for num in range(1,10):</span><br><span class="line">    example_digits &#x3D; np.vstack([example_digits, noisy_digits[y&#x3D;&#x3D;num,:][:10]])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[9]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">example_digits.shape</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[10]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def plot_digits(data):</span><br><span class="line">    fig, axes &#x3D; plt.subplots(10, 10, figsize&#x3D;(10, 10),</span><br><span class="line">                             subplot_kw&#x3D;&#123;&#39;xticks&#39;:[], &#39;yticks&#39;:[]&#125;,</span><br><span class="line">    gridspec_kw&#x3D;dict(hspace&#x3D;0.1, wspace&#x3D;0.1)) </span><br><span class="line">    for i, ax in enumerate(axes.flat):</span><br><span class="line">        ax.imshow(data[i].reshape(8, 8),</span><br><span class="line">                  cmap&#x3D;&#39;binary&#39;, interpolation&#x3D;&#39;nearest&#39;,</span><br><span class="line">                  clim&#x3D;(0, 16))</span><br><span class="line"></span><br><span class="line">    plt.show()</span><br><span class="line">    </span><br><span class="line">plot_digits(example_digits)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[11]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pca &#x3D; PCA(0.5).fit(noisy_digits)</span><br><span class="line">pca.n_components_</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[12]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">components &#x3D; pca.transform(example_digits)</span><br><span class="line">filtered_digits &#x3D; pca.inverse_transform(components)</span><br><span class="line">plot_digits(filtered_digits)</span><br></pre></td></tr></table></figure>
+        <h2 id="使用PCA去噪"><a href="#使用PCA去噪" class="headerlink" title="使用PCA去噪"></a>使用PCA去噪</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X = np.empty((<span class="number">100</span>, <span class="number">2</span>))</span><br><span class="line">X[:,<span class="number">0</span>] = np.random.uniform(<span class="number">0.</span>, <span class="number">100.</span>, size=<span class="number">100</span>)</span><br><span class="line">X[:,<span class="number">1</span>] = <span class="number">0.75</span> * X[:,<span class="number">0</span>] + <span class="number">3.</span> + np.random.normal(<span class="number">0</span>, <span class="number">5</span>, size=<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter(X[:,<span class="number">0</span>], X[:,<span class="number">1</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/css/images/08-PCA-for-Noise-Reduction_files/08-PCA-for-Noise-Reduction_4_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line">pca = PCA(n_components=<span class="number">1</span>)</span><br><span class="line">pca.fit(X)</span><br><span class="line">X_reduction = pca.transform(X)</span><br><span class="line">X_restore = pca.inverse_transform(X_reduction)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter(X_restore[:,<span class="number">0</span>], X_restore[:,<span class="number">1</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/css/images/08-PCA-for-Noise-Reduction_files/08-PCA-for-Noise-Reduction_6_0.png" alt="png"></p>
+<p>降维的过程可以理解成是去噪。</p>
+<h3 id="手写识别的例子"><a href="#手写识别的例子" class="headerlink" title="手写识别的例子"></a>手写识别的例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"></span><br><span class="line">digits = datasets.load_digits()</span><br><span class="line">X = digits.data</span><br><span class="line">y = digits.target</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">noisy_digits = X + np.random.normal(<span class="number">0</span>, <span class="number">4</span>, size=X.shape)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">example_digits = noisy_digits[y==<span class="number">0</span>,:][:<span class="number">10</span>]</span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">10</span>):</span><br><span class="line">    example_digits = np.vstack([example_digits, noisy_digits[y==num,:][:<span class="number">10</span>]])</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">example_digits.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(100, 64)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_digits</span><span class="params">(data)</span>:</span></span><br><span class="line">    fig, axes = plt.subplots(<span class="number">10</span>, <span class="number">10</span>, figsize=(<span class="number">10</span>, <span class="number">10</span>),</span><br><span class="line">                             subplot_kw=&#123;<span class="string">'xticks'</span>:[], <span class="string">'yticks'</span>:[]&#125;,</span><br><span class="line">    gridspec_kw=dict(hspace=<span class="number">0.1</span>, wspace=<span class="number">0.1</span>)) </span><br><span class="line">    <span class="keyword">for</span> i, ax <span class="keyword">in</span> enumerate(axes.flat):</span><br><span class="line">        ax.imshow(data[i].reshape(<span class="number">8</span>, <span class="number">8</span>),</span><br><span class="line">                  cmap=<span class="string">'binary'</span>, interpolation=<span class="string">'nearest'</span>,</span><br><span class="line">                  clim=(<span class="number">0</span>, <span class="number">16</span>))</span><br><span class="line"></span><br><span class="line">    plt.show()</span><br><span class="line">    </span><br><span class="line">plot_digits(example_digits)</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/css/images/08-PCA-for-Noise-Reduction_files/08-PCA-for-Noise-Reduction_13_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pca = PCA(<span class="number">0.5</span>).fit(noisy_digits)</span><br><span class="line">pca.n_components_</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>12</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components = pca.transform(example_digits)</span><br><span class="line">filtered_digits = pca.inverse_transform(components)</span><br><span class="line">plot_digits(filtered_digits)</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/css/images/08-PCA-for-Noise-Reduction_files/08-PCA-for-Noise-Reduction_15_0.png" alt="png"></p>
+
       
     </div>
     <footer class="article-footer">
@@ -274,7 +324,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          SVM
+          支持向量机SVM
         
       </div>
     </a>
@@ -282,7 +332,7 @@
   
     <a href="/2016/07/13/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">梯度下降法</div>
+      <div class="article-nav-title">梯度下降法和PCA</div>
     </a>
   
 </nav>
@@ -296,7 +346,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-        <ol class="nav">None</ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用PCA去噪"><span class="nav-number">1.</span> <span class="nav-text">使用PCA去噪</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#手写识别的例子"><span class="nav-number">1.1.</span> <span class="nav-text">手写识别的例子</span></a></li></ol></li></ol>
     
     </div>
   </aside>

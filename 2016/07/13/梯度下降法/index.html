@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>梯度下降法 | Inner peace</title>
+  <title>梯度下降法和pca | Inner peace</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="PCA" />
@@ -13,16 +13,19 @@
   
   <meta name="description" content="PCA和梯度法核心思想&amp;emsp;&amp;emsp;其实严格来说，梯度下降法不是机器学习算法，是一种基于搜索的最优方法。 &amp;emsp;&amp;emsp;主要作用是最小化一个损失函数。相对应的，梯度上升法就是最大化一个效用函数。 关于梯度下降算法的直观理解，我们以一个人下山为例。按照梯度下降算法的思想，它将按如下操作达到最低点： 第一步，明确自己现在所处的位置 第二步，找到相对于该位置而言下降最快的方向 第三步">
 <meta property="og:type" content="article">
-<meta property="og:title" content="梯度下降法">
+<meta property="og:title" content="梯度下降法和PCA">
 <meta property="og:url" content="https://yuzeyu.cn/2016/07/13/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/index.html">
 <meta property="og:site_name" content="Inner peace">
 <meta property="og:description" content="PCA和梯度法核心思想&amp;emsp;&amp;emsp;其实严格来说，梯度下降法不是机器学习算法，是一种基于搜索的最优方法。 &amp;emsp;&amp;emsp;主要作用是最小化一个损失函数。相对应的，梯度上升法就是最大化一个效用函数。 关于梯度下降算法的直观理解，我们以一个人下山为例。按照梯度下降算法的思想，它将按如下操作达到最低点： 第一步，明确自己现在所处的位置 第二步，找到相对于该位置而言下降最快的方向 第三步">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yuzeyu.cn/css/images/06-PCA-in-scikit-learn_files/06-PCA-in-scikit-learn_14_0.png">
+<meta property="og:image" content="https://yuzeyu.cn/css/images/06-PCA-in-scikit-learn_files/06-PCA-in-scikit-learn_22_0.png">
 <meta property="article:published_time" content="2016-07-13T05:51:00.000Z">
-<meta property="article:modified_time" content="2020-07-13T07:27:54.731Z">
+<meta property="article:modified_time" content="2020-07-13T11:58:31.380Z">
 <meta property="article:author" content="Mr.Yu">
 <meta property="article:tag" content="PCA">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuzeyu.cn/css/images/06-PCA-in-scikit-learn_files/06-PCA-in-scikit-learn_14_0.png">
   
     <link rel="alternate" href="/atom.xml" title="Inner peace" type="application/atom+xml">
   
@@ -180,7 +183,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      梯度下降法
+      梯度下降法和PCA
     </h1>
   
 
@@ -215,8 +218,109 @@
 <p>第三步， 沿着第二步找到的方向走一小步，到达一个新的位置，此时的位置肯定比原来低</p>
 <p>第四部， 回到第一步</p>
 <p>第五步，终止于最低点</p>
-<p>代码实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># coding: utf-8</span><br><span class="line"></span><br><span class="line"># ## scikit-learn中使用PCA</span><br><span class="line"></span><br><span class="line"># In[1]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from sklearn import datasets</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[2]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">digits &#x3D; datasets.load_digits()</span><br><span class="line">X &#x3D; digits.data</span><br><span class="line">y &#x3D; digits.target</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[3]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line"></span><br><span class="line">X_train, X_test, y_train, y_test &#x3D; train_test_split(X, y, random_state&#x3D;666)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[4]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">X_train.shape</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[5]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">get_ipython().run_cell_magic(&#39;time&#39;, &#39;&#39;, &#39;\nfrom sklearn.neighbors import KNeighborsClassifier\n\nknn_clf &#x3D; KNeighborsClassifier()\nknn_clf.fit(X_train, y_train)&#39;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[6]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">knn_clf.score(X_test, y_test)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[7]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">from sklearn.decomposition import PCA</span><br><span class="line"></span><br><span class="line">pca &#x3D; PCA(n_components&#x3D;2)</span><br><span class="line">pca.fit(X_train)</span><br><span class="line">X_train_reduction &#x3D; pca.transform(X_train)</span><br><span class="line">X_test_reduction &#x3D; pca.transform(X_test)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[8]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">get_ipython().run_cell_magic(&#39;time&#39;, &#39;&#39;, &#39;knn_clf &#x3D; KNeighborsClassifier()\nknn_clf.fit(X_train_reduction, y_train)&#39;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[9]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">knn_clf.score(X_test_reduction, y_test)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># ### 主成分所解释的方差</span><br><span class="line"></span><br><span class="line"># In[10]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pca.explained_variance_ratio_</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[11]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pca.explained_variance_</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[12]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">from sklearn.decomposition import PCA</span><br><span class="line"></span><br><span class="line">pca &#x3D; PCA(n_components&#x3D;X_train.shape[1])</span><br><span class="line">pca.fit(X_train)</span><br><span class="line">pca.explained_variance_ratio_</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[13]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.plot([i for i in range(X_train.shape[1])], </span><br><span class="line">         [np.sum(pca.explained_variance_ratio_[:i+1]) for i in range(X_train.shape[1])])</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[14]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pca &#x3D; PCA(0.95)</span><br><span class="line">pca.fit(X_train)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[15]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pca.n_components_</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[16]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">X_train_reduction &#x3D; pca.transform(X_train)</span><br><span class="line">X_test_reduction &#x3D; pca.transform(X_test)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[17]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">get_ipython().run_cell_magic(&#39;time&#39;, &#39;&#39;, &#39;knn_clf &#x3D; KNeighborsClassifier()\nknn_clf.fit(X_train_reduction, y_train)&#39;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[18]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">knn_clf.score(X_test_reduction, y_test)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># ### 使用PCA对数据进行降维可视化</span><br><span class="line"></span><br><span class="line"># In[19]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pca &#x3D; PCA(n_components&#x3D;2)</span><br><span class="line">pca.fit(X)</span><br><span class="line">X_reduction &#x3D; pca.transform(X)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[20]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for i in range(10):</span><br><span class="line">    plt.scatter(X_reduction[y&#x3D;&#x3D;i,0], X_reduction[y&#x3D;&#x3D;i,1], alpha&#x3D;0.8)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="scikit-learn中使用PCA"><a href="#scikit-learn中使用PCA" class="headerlink" title="scikit-learn中使用PCA"></a>scikit-learn中使用PCA</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">digits = datasets.load_digits()</span><br><span class="line">X = digits.data</span><br><span class="line">y = digits.target</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=<span class="number">666</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train.shape</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>(1347, 64)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%time</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"></span><br><span class="line">knn_clf = KNeighborsClassifier()</span><br><span class="line">knn_clf.fit(X_train, y_train)</span><br></pre></td></tr></table></figure>
+
+<pre><code>CPU times: user 19.9 ms, sys: 7.47 ms, total: 27.4 ms
+Wall time: 64.5 ms</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knn_clf.score(X_test, y_test)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>0.98666666666666669</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line">pca = PCA(n_components=<span class="number">2</span>)</span><br><span class="line">pca.fit(X_train)</span><br><span class="line">X_train_reduction = pca.transform(X_train)</span><br><span class="line">X_test_reduction = pca.transform(X_test)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%time </span><br><span class="line">knn_clf = KNeighborsClassifier()</span><br><span class="line">knn_clf.fit(X_train_reduction, y_train)</span><br></pre></td></tr></table></figure>
+
+<pre><code>CPU times: user 2.13 ms, sys: 767 µs, total: 2.9 ms
+Wall time: 2.93 ms</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knn_clf.score(X_test_reduction, y_test)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>0.60666666666666669</code></pre><h3 id="主成分所解释的方差"><a href="#主成分所解释的方差" class="headerlink" title="主成分所解释的方差"></a>主成分所解释的方差</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pca.explained_variance_ratio_</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([ 0.14566817,  0.13735469])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pca.explained_variance_</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([ 175.77007821,  165.73864334])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line">pca = PCA(n_components=X_train.shape[<span class="number">1</span>])</span><br><span class="line">pca.fit(X_train)</span><br><span class="line">pca.explained_variance_ratio_</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([  1.45668166e-01,   1.37354688e-01,   1.17777287e-01,
+         8.49968861e-02,   5.86018996e-02,   5.11542945e-02,
+         4.26605279e-02,   3.60119663e-02,   3.41105814e-02,
+         3.05407804e-02,   2.42337671e-02,   2.28700570e-02,
+         1.80304649e-02,   1.79346003e-02,   1.45798298e-02,
+         1.42044841e-02,   1.29961033e-02,   1.26617002e-02,
+         1.01728635e-02,   9.09314698e-03,   8.85220461e-03,
+         7.73828332e-03,   7.60516219e-03,   7.11864860e-03,
+         6.85977267e-03,   5.76411920e-03,   5.71688020e-03,
+         5.08255707e-03,   4.89020776e-03,   4.34888085e-03,
+         3.72917505e-03,   3.57755036e-03,   3.26989470e-03,
+         3.14917937e-03,   3.09269839e-03,   2.87619649e-03,
+         2.50362666e-03,   2.25417403e-03,   2.20030857e-03,
+         1.98028746e-03,   1.88195578e-03,   1.52769283e-03,
+         1.42823692e-03,   1.38003340e-03,   1.17572392e-03,
+         1.07377463e-03,   9.55152460e-04,   9.00017642e-04,
+         5.79162563e-04,   3.82793717e-04,   2.38328586e-04,
+         8.40132221e-05,   5.60545588e-05,   5.48538930e-05,
+         1.08077650e-05,   4.01354717e-06,   1.23186515e-06,
+         1.05783059e-06,   6.06659094e-07,   5.86686040e-07,
+         7.44075955e-34,   7.44075955e-34,   7.44075955e-34,
+         7.15189459e-34])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.plot([i <span class="keyword">for</span> i <span class="keyword">in</span> range(X_train.shape[<span class="number">1</span>])], </span><br><span class="line">         [np.sum(pca.explained_variance_ratio_[:i+<span class="number">1</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> range(X_train.shape[<span class="number">1</span>])])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/css/images/06-PCA-in-scikit-learn_files/06-PCA-in-scikit-learn_14_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pca = PCA(<span class="number">0.95</span>)</span><br><span class="line">pca.fit(X_train)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>PCA(copy=True, iterated_power=&apos;auto&apos;, n_components=0.95, random_state=None,
+  svd_solver=&apos;auto&apos;, tol=0.0, whiten=False)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pca.n_components_</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>28</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X_train_reduction = pca.transform(X_train)</span><br><span class="line">X_test_reduction = pca.transform(X_test)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%time </span><br><span class="line">knn_clf = KNeighborsClassifier()</span><br><span class="line">knn_clf.fit(X_train_reduction, y_train)</span><br></pre></td></tr></table></figure>
+
+<pre><code>CPU times: user 4.21 ms, sys: 1.28 ms, total: 5.49 ms
+Wall time: 19.7 ms</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knn_clf.score(X_test_reduction, y_test)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>0.97999999999999998</code></pre><h3 id="使用PCA对数据进行降维可视化"><a href="#使用PCA对数据进行降维可视化" class="headerlink" title="使用PCA对数据进行降维可视化"></a>使用PCA对数据进行降维可视化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pca = PCA(n_components=<span class="number">2</span>)</span><br><span class="line">pca.fit(X)</span><br><span class="line">X_reduction = pca.transform(X)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    plt.scatter(X_reduction[y==i,<span class="number">0</span>], X_reduction[y==i,<span class="number">1</span>], alpha=<span class="number">0.8</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/css/images/06-PCA-in-scikit-learn_files/06-PCA-in-scikit-learn_22_0.png" alt="png"></p>
+
       
     </div>
     <footer class="article-footer">
@@ -229,7 +333,7 @@
           </li>
           <li class="post-copyright-link">
           <strong>Post link:  </strong>
-          <a href="/2016/07/13/梯度下降法/" target="_blank" title="梯度下降法">https://yuzeyu.cn/2016/07/13/梯度下降法/</a>
+          <a href="/2016/07/13/梯度下降法/" target="_blank" title="梯度下降法和PCA">https://yuzeyu.cn/2016/07/13/梯度下降法/</a>
           </li>
           <li class="post-copyright-license">
             <strong>Copyright Notice:   </strong>
@@ -305,7 +409,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PCA和梯度法"><span class="nav-number">1.</span> <span class="nav-text">PCA和梯度法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思想"><span class="nav-number">1.1.</span> <span class="nav-text">核心思想</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PCA和梯度法"><span class="nav-number">1.</span> <span class="nav-text">PCA和梯度法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思想"><span class="nav-number">1.1.</span> <span class="nav-text">核心思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scikit-learn中使用PCA"><span class="nav-number">1.2.</span> <span class="nav-text">scikit-learn中使用PCA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主成分所解释的方差"><span class="nav-number">1.2.1.</span> <span class="nav-text">主成分所解释的方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用PCA对数据进行降维可视化"><span class="nav-number">1.2.2.</span> <span class="nav-text">使用PCA对数据进行降维可视化</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>
