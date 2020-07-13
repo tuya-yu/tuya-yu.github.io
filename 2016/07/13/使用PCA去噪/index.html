@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>knn | Inner peace</title>
+  <title>使用pca去噪 | Inner peace</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="KNN" />
+  <meta name="keywords" content="PCA" />
   
   
   
   
-  <meta name="description" content="KNN核心思想&amp;emsp;&amp;emsp;如果一个样本在特征空间中的K个最相邻的样本中的大多数属于某一个类别，则该样本也属于这个类别，并具有这个类别上样本的特性。&amp;emsp;&amp;emsp;该方法在确定分类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。KNN方法在类别决策时，只与极少量的相邻样本有关。由于KNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因">
+  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KNN">
-<meta property="og:url" content="https://yuzeyu.cn/2019/07/01/KNN/index.html">
+<meta property="og:title" content="使用PCA去噪">
+<meta property="og:url" content="https://yuzeyu.cn/2016/07/13/%E4%BD%BF%E7%94%A8PCA%E5%8E%BB%E5%99%AA/index.html">
 <meta property="og:site_name" content="Inner peace">
-<meta property="og:description" content="KNN核心思想&amp;emsp;&amp;emsp;如果一个样本在特征空间中的K个最相邻的样本中的大多数属于某一个类别，则该样本也属于这个类别，并具有这个类别上样本的特性。&amp;emsp;&amp;emsp;该方法在确定分类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。KNN方法在类别决策时，只与极少量的相邻样本有关。由于KNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2019-07-01T11:03:00.000Z">
-<meta property="article:modified_time" content="2020-07-01T11:05:42.425Z">
+<meta property="article:published_time" content="2016-07-13T07:30:00.000Z">
+<meta property="article:modified_time" content="2020-07-13T07:31:28.741Z">
 <meta property="article:author" content="Mr.Yu">
-<meta property="article:tag" content="KNN">
+<meta property="article:tag" content="PCA">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Inner peace" type="application/atom+xml">
@@ -172,7 +172,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-KNN" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-使用PCA去噪" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -180,7 +180,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      KNN
+      使用PCA去噪
     </h1>
   
 
@@ -188,8 +188,8 @@
     
     <div class="article-meta">
       
-	<a href="/2019/07/01/KNN/" class="article-date">
-	  <time datetime="2019-07-01T11:03:00.000Z" itemprop="datePublished">2019-07-01</time>
+	<a href="/2016/07/13/%E4%BD%BF%E7%94%A8PCA%E5%8E%BB%E5%99%AA/" class="article-date">
+	  <time datetime="2016-07-13T07:30:00.000Z" itemprop="datePublished">2016-07-13</time>
 	</a>
 
       
@@ -207,19 +207,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h1><h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>&emsp;&emsp;如果一个样本在特征空间中的K个最相邻的样本中的大多数属于某一个类别，则该样本也属于这个类别，并具有这个类别上样本的特性。<br>&emsp;&emsp;该方法在确定分类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。KNN方法在类别决策时，只与极少量的相邻样本有关。由于KNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，KNN方法较其他方法更为适合</p>
-<h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><p>总体来说，KNN分类算法包括以下4个步骤：<br>①数据预处理。<br>②计算测试样本点到其他每个样本点的距离。<br>③对每个距离进行排序，然后选择出距离最小的K个点。<br>④对K个点所属的类别进行比较，根据少数服从多数的原则，将测试样本点归入在K个点中占比最高的那一类</p>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>&emsp;&emsp;KNN方法思路简单，易于理解，易于实现，无需估计参数，无需训练</p>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>该算法在分类时主要有两个不足：<br>（1）当样本不平衡时，如一个类的样本容量很大，而其他类样本容量很小时，有可能导致当输入一个新样本时，该样本的K个邻居中大容量类的样本占多数。<br>（2）计算量较大，因为对每一个待分类的文本都要计算它到全体已知样本的距离，才能求得它的K个最近邻点。</p>
-<blockquote>
-<p>python 实现</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def classify0(inX, dataSet, labels, k):</span><br><span class="line">    dataSetSize &#x3D; dataSet.shape[0]</span><br><span class="line">    diffMat &#x3D; tile(inX, (dataSetSize,1)) - dataSet  #计算距离</span><br><span class="line">    sqDiffMat &#x3D; diffMat**2</span><br><span class="line">    sqDistances &#x3D; sqDiffMat.sum(axis&#x3D;1)</span><br><span class="line">    distances &#x3D; sqDistances**0.5</span><br><span class="line">    sortedDistIndicies &#x3D; distances.argsort()     </span><br><span class="line">    classCount&#x3D;&#123;&#125;          </span><br><span class="line">    for i in range(k):</span><br><span class="line">        voteIlabel &#x3D; labels[sortedDistIndicies[i]]     #选择距离最小的k个点</span><br><span class="line">        classCount[voteIlabel] &#x3D; classCount.get(voteIlabel,0) + 1</span><br><span class="line">    sortedClassCount &#x3D; sorted(classCount.iteritems(), key&#x3D;operator.itemgetter(1), reverse&#x3D;True)  #排序</span><br><span class="line">    return sortedClassCount[0][0]</span><br></pre></td></tr></table></figure>
-<p>classify0()函数有4个输入参数：用于分类的输入向量是inX，输入的训练样本集是dataSet,标签向量为labels，最后的参数k表示用于选择最近邻的数目，其中标签向量的元素数目和矩阵dataSet的行数相同。<br>上面的实现过程使用的欧式距离，计算xA和xB之间的距离。</p>
-<p>准备数据：归一化数值<br>如果将数值取值范围处理为0到1之间<br>newValue = (oldValue - min) / (max-min)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def autoNorm(dataSet):</span><br><span class="line">    minVals &#x3D; dataSet.min(0)</span><br><span class="line">    maxVals &#x3D; dataSet.max(0)</span><br><span class="line">    ranges &#x3D; maxVals - minVals</span><br><span class="line">    normDataSet &#x3D; zeros(shape(dataSet))</span><br><span class="line">    m &#x3D; dataSet.shape[0]</span><br><span class="line">    normDataSet &#x3D; dataSet - tile(minVals, (m,1))</span><br><span class="line">    normDataSet &#x3D; normDataSet&#x2F;tile(ranges, (m,1))   #element wise divide</span><br><span class="line">    return normDataSet, ranges, minVals</span><br></pre></td></tr></table></figure>
-
-
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># coding: utf-8</span><br><span class="line"></span><br><span class="line"># ## 使用PCA去噪</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[1]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[2]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">X &#x3D; np.empty((100, 2))</span><br><span class="line">X[:,0] &#x3D; np.random.uniform(0., 100., size&#x3D;100)</span><br><span class="line">X[:,1] &#x3D; 0.75 * X[:,0] + 3. + np.random.normal(0, 5, size&#x3D;100)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[3]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.scatter(X[:,0], X[:,1])</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[4]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">from sklearn.decomposition import PCA</span><br><span class="line"></span><br><span class="line">pca &#x3D; PCA(n_components&#x3D;1)</span><br><span class="line">pca.fit(X)</span><br><span class="line">X_reduction &#x3D; pca.transform(X)</span><br><span class="line">X_restore &#x3D; pca.inverse_transform(X_reduction)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[5]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plt.scatter(X_restore[:,0], X_restore[:,1])</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 降维的过程可以理解成是去噪。</span><br><span class="line"></span><br><span class="line"># ### 手写识别的例子</span><br><span class="line"></span><br><span class="line"># In[6]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">from sklearn import datasets</span><br><span class="line"></span><br><span class="line">digits &#x3D; datasets.load_digits()</span><br><span class="line">X &#x3D; digits.data</span><br><span class="line">y &#x3D; digits.target</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[7]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">noisy_digits &#x3D; X + np.random.normal(0, 4, size&#x3D;X.shape)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[8]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">example_digits &#x3D; noisy_digits[y&#x3D;&#x3D;0,:][:10]</span><br><span class="line">for num in range(1,10):</span><br><span class="line">    example_digits &#x3D; np.vstack([example_digits, noisy_digits[y&#x3D;&#x3D;num,:][:10]])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[9]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">example_digits.shape</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[10]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def plot_digits(data):</span><br><span class="line">    fig, axes &#x3D; plt.subplots(10, 10, figsize&#x3D;(10, 10),</span><br><span class="line">                             subplot_kw&#x3D;&#123;&#39;xticks&#39;:[], &#39;yticks&#39;:[]&#125;,</span><br><span class="line">    gridspec_kw&#x3D;dict(hspace&#x3D;0.1, wspace&#x3D;0.1)) </span><br><span class="line">    for i, ax in enumerate(axes.flat):</span><br><span class="line">        ax.imshow(data[i].reshape(8, 8),</span><br><span class="line">                  cmap&#x3D;&#39;binary&#39;, interpolation&#x3D;&#39;nearest&#39;,</span><br><span class="line">                  clim&#x3D;(0, 16))</span><br><span class="line"></span><br><span class="line">    plt.show()</span><br><span class="line">    </span><br><span class="line">plot_digits(example_digits)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[11]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pca &#x3D; PCA(0.5).fit(noisy_digits)</span><br><span class="line">pca.n_components_</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># In[12]:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">components &#x3D; pca.transform(example_digits)</span><br><span class="line">filtered_digits &#x3D; pca.inverse_transform(components)</span><br><span class="line">plot_digits(filtered_digits)</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
@@ -232,7 +220,7 @@
           </li>
           <li class="post-copyright-link">
           <strong>Post link:  </strong>
-          <a href="/2019/07/01/KNN/" target="_blank" title="KNN">https://yuzeyu.cn/2019/07/01/KNN/</a>
+          <a href="/2016/07/13/使用PCA去噪/" target="_blank" title="使用PCA去噪">https://yuzeyu.cn/2016/07/13/使用PCA去噪/</a>
           </li>
           <li class="post-copyright-license">
             <strong>Copyright Notice:   </strong>
@@ -272,7 +260,7 @@
       
       
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KNN/" rel="tag">KNN</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PCA/" rel="tag">PCA</a></li></ul>
 
       
 
@@ -282,19 +270,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/07/08/hadoop%E6%90%AD%E5%BB%BA/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/07/13/SVM/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          hadoop企业级搭建
+          SVM
         
       </div>
     </a>
   
   
-    <a href="/2019/07/01/MapReduce%E7%BC%96%E7%A8%8B%E8%AF%A6%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/07/13/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">MapReduce编程详解</div>
+      <div class="article-nav-title">梯度下降法</div>
     </a>
   
 </nav>
@@ -308,7 +296,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KNN"><span class="nav-number">1.</span> <span class="nav-text">KNN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思想"><span class="nav-number">1.1.</span> <span class="nav-text">核心思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法流程"><span class="nav-number">1.2.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点"><span class="nav-number">1.3.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺点"><span class="nav-number">1.4.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol>
+        <ol class="nav">None</ol>
     
     </div>
   </aside>
