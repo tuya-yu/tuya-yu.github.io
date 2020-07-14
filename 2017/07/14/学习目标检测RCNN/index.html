@@ -3,21 +3,29 @@
 <head>
   <meta charset="utf-8">
   
-  <title>category: 自省 | Inner peace</title>
+  <title>深度学习目标检测rcnn | Inner peace</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="keywords" content="目标检测" />
   
   
   
-  <meta name="description" content="Someone knock at the door">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Inner peace">
-<meta property="og:url" content="https://yuzeyu.cn/categories/%E8%87%AA%E7%9C%81/index.html">
+  
+  <meta name="description" content="深度学习目标检测：RCNN什么是目标检测？目标检测主要是明确从图中看到了什么物体？他们在什么位置。传统的目标检测方法一般分为三个阶段：首先在给定的图像上选择一些候选的区域，然后对这些区域提取特征，最后使用训练的分类器进行分类。   区域选择   &amp;emsp;&amp;emsp;这一步是为了对目标进行定位。传统方法是采用穷举策略。由于目标可能在图片上的任意位置，而且大小不定，因此使用滑动窗口的策略对整幅图像">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习目标检测RCNN">
+<meta property="og:url" content="https://yuzeyu.cn/2017/07/14/%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8BRCNN/index.html">
 <meta property="og:site_name" content="Inner peace">
-<meta property="og:description" content="Someone knock at the door">
+<meta property="og:description" content="深度学习目标检测：RCNN什么是目标检测？目标检测主要是明确从图中看到了什么物体？他们在什么位置。传统的目标检测方法一般分为三个阶段：首先在给定的图像上选择一些候选的区域，然后对这些区域提取特征，最后使用训练的分类器进行分类。   区域选择   &amp;emsp;&amp;emsp;这一步是为了对目标进行定位。传统方法是采用穷举策略。由于目标可能在图片上的任意位置，而且大小不定，因此使用滑动窗口的策略对整幅图像">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yuzeyu.cn/css/images/1.png">
+<meta property="og:image" content="https://yuzeyu.cn/css/images/2.png">
+<meta property="article:published_time" content="2017-07-14T09:06:00.000Z">
+<meta property="article:modified_time" content="2020-07-14T09:16:34.700Z">
 <meta property="article:author" content="Mr.Yu">
+<meta property="article:tag" content="目标检测">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yuzeyu.cn/css/images/1.png">
   
     <link rel="alternate" href="/atom.xml" title="Inner peace" type="application/atom+xml">
   
@@ -66,8 +74,6 @@
   
 
   
-    <link rel="stylesheet" href="/css/archive.css" >
-  
   
   
 
@@ -75,7 +81,7 @@
 
 
 
-  <body>
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
   
@@ -98,7 +104,7 @@
             
               <a class="brand" style="
                  margin-top: 0px;"  
-                 >
+                href="#" data-toggle="modal" data-target="#myModal" >
                   <img width="124px" height="124px" alt="Hike News" src="/css/images/yu.png">
               </a>
             
@@ -169,43 +175,162 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;">
-  
-  
-  
+          <section id="main" style="float:none;"><article id="post-学习目标检测RCNN" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
     
     
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <h1><a href="/archives/2016" class="archive-year">2016</a></h1>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
-	<a href="/2016/06/27/%E6%8B%BC%E6%8B%BC%E5%87%91%E5%87%91/" class="archive-article-date">
-	  <time datetime="2016-06-27T08:48:00.000Z" itemprop="datePublished">2016-06-27</time>
-	</a>
-
-      
+      <header class="article-header">
+        
   
-    <h1 class="thumb" itemprop="name">
-      <a class="archive-article-title" href="/2016/06/27/%E6%8B%BC%E6%8B%BC%E5%87%91%E5%87%91/">拼拼凑凑</a>
+    <h1 class="thumb" class="article-title" itemprop="name">
+      深度学习目标检测RCNN
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/07/14/%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8BRCNN/" class="article-date">
+	  <time datetime="2017-07-14T09:06:00.000Z" itemprop="datePublished">2017-07-14</time>
+	</a>
 
+      
+    <a class="article-category-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="深度学习目标检测：RCNN"><a href="#深度学习目标检测：RCNN" class="headerlink" title="深度学习目标检测：RCNN"></a>深度学习目标检测：RCNN</h2><p>什么是目标检测？目标检测主要是明确从图中看到了什么物体？他们在什么位置。传统的目标检测方法一般分为三个阶段：首先在给定的图像上选择一些候选的区域，然后对这些区域提取特征，最后使用训练的分类器进行分类。</p>
+<blockquote>
+<ol>
+<li>区域选择</li>
+</ol>
+</blockquote>
+<p>&emsp;&emsp;这一步是为了对目标进行定位。传统方法是采用穷举策略。由于目标可能在图片上的任意位置，而且大小不定，因此使用滑动窗口的策略对整幅图像进行遍历，而且需要设置不同的长宽。这种策略虽然可以检测到所有可能出现的位置，但是时间复杂度太高，产生的冗余窗口太多，严重影响后续特征的提取和分类速度的性能。</p>
+<blockquote>
+<ol start="2">
+<li>特征提取 </li>
+</ol>
+</blockquote>
+<p>&emsp;&emsp;提取特征的好坏会直接影响到分类的准确性，但又由于目标的形态多样性，提取一个鲁棒的特征并不是一个简单的事。这个阶段常用的特征有SIFT（尺度不变特征变换 ，Scale-invariant feature transform）和HOG（ 方向梯度直方图特征，Histogram of Oriented Gradient）等。</p>
+<blockquote>
+<ol start="3">
+<li>分类器 </li>
+</ol>
+</blockquote>
+<p>&emsp;&emsp;主要有SVM，Adaboost等综上所述，传统目标检测存在两个主要问题：一个是基于滑动窗口的区域选择策略没有针对性，时间复杂度高，窗口冗余；而是手工设计的特征对于多样性没有很好的鲁棒性。</p>
+<h2 id="RCNN的检测流程："><a href="#RCNN的检测流程：" class="headerlink" title="RCNN的检测流程："></a>RCNN的检测流程：</h2><p>&emsp;&emsp;RCNN主要分为3个大部分，第一部分产生候选区域，第二部分对每个候选区域使用CNN提取长度固定的特征；第三个部分使用一系列的SVM进行分类。<br>下面就是RCNN的整体检测流程</p>
+<p><img src="/css/images/1.png" alt="R-CNN"></p>
+<ul>
+<li>首先输入一张自然图像;</li>
+<li>使用Selective Search提取大约2000个候选区域（proposal）;</li>
+<li>对每个候选区域的图像进行拉伸形变，使之成为固定大小的正方形图像，并将该图像输入到CNN中提取特征;</li>
+<li>使用线性的SVM对提取的特征进行分类。</li>
+</ul>
+<p><img src="/css/images/2.png" alt="upload successful"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>Mr.Yu</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2017/07/14/学习目标检测RCNN/" target="_blank" title="深度学习目标检测RCNN">https://yuzeyu.cn/2017/07/14/学习目标检测RCNN/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" rel="tag">目标检测</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/06/26/Hadoop%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%BA%94%E7%94%A8-%E4%B8%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hadoop配置与应用(一)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/14/G/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">VGG深度卷积神经网络</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#深度学习目标检测：RCNN"><span class="nav-number">1.</span> <span class="nav-text">深度学习目标检测：RCNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RCNN的检测流程："><span class="nav-number">2.</span> <span class="nav-text">RCNN的检测流程：</span></a></li></ol>
+    
+    </div>
+  </aside>
 
 </section>
         
@@ -309,6 +434,10 @@
 
 
 
+  
+<script src="/js/dialog.js"></script>
+
+
 
 
 
@@ -392,6 +521,8 @@
   
   <a id="rocket" href="#top" class=""></a>
   <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
   
 </body>
 </html>

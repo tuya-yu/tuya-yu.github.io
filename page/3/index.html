@@ -299,6 +299,176 @@
         
           <section id="main" style="float:none;">
   
+    <article id="post-验证"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2016/07/13/%E9%AA%8C%E8%AF%81/">交叉验证</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2016/07/13/%E9%AA%8C%E8%AF%81/" class="article-date">
+	  <time datetime="2016-07-13T12:09:00.000Z" itemprop="datePublished">2016-07-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          Validation 和 Cross Validation12import numpy as npfrom sklearn import datasets
+
+
+123digits = datasets.load_digits()X = digits.datay = digits.target
+
+测试train_test_split12from sklearn.model_selection import train_test_splitX_train, X_test, y_train, y...
+        </p>
+        <p class="article-more-link">
+          <a href="/2016/07/13/%E9%AA%8C%E8%AF%81/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-式回归和Pipeline"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2016/07/13/%E5%BC%8F%E5%9B%9E%E5%BD%92%E5%92%8CPipeline/">多项式回归和Pipeline</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2016/07/13/%E5%BC%8F%E5%9B%9E%E5%BD%92%E5%92%8CPipeline/" class="article-date">
+	  <time datetime="2016-07-13T12:06:00.000Z" itemprop="datePublished">2016-07-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          scikit-learn中的多项式回归和Pipeline12import numpy as np import matplotlib.pyplot as plt
+
+
+123x = np.random.uniform(-3, 3, size=100)X = x.reshape(-1, 1)y = 0.5 * x**2 + x + 2 + np.random.normal(0, 1, 100)
+
+
+1from sklearn.preprocessing import PolynomialFea...
+        </p>
+        <p class="article-more-link">
+          <a href="/2016/07/13/%E5%BC%8F%E5%9B%9E%E5%BD%92%E5%92%8CPipeline/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-A-IN-3D"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2016/07/13/A-IN-3D/">PCA-IN-3D</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2016/07/13/A-IN-3D/" class="article-date">
+	  <time datetime="2016-07-13T12:01:00.000Z" itemprop="datePublished">2016-07-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          可视化三维样本数据点的PCA过程1234567import numpy as npfrom mpl_toolkits import mplot3dimport matplotlib.pyplot as plt# 在三维空间随机生成100个样本点np.random.seed(8888)X_random = np.random.random(size=(100, 3))
+
+
+123ax = plt.axes(projection='3d')ax.scatter3D(X_random[:,0],...
+        </p>
+        <p class="article-more-link">
+          <a href="/2016/07/13/A-IN-3D/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
     <article id="post-树回归"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
@@ -570,6 +740,61 @@
         </p>
         <p class="article-more-link">
           <a href="/2016/07/01/KNN/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-拼拼凑凑"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2016/06/27/%E6%8B%BC%E6%8B%BC%E5%87%91%E5%87%91/">略懂略懂</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2016/06/27/%E6%8B%BC%E6%8B%BC%E5%87%91%E5%87%91/" class="article-date">
+	  <time datetime="2016-06-27T08:48:00.000Z" itemprop="datePublished">2016-06-27</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/%E9%97%B2%E6%89%AF/">闲扯</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          缘起1《越光宝盒》里，曾志伟演的诸葛亮总是说‘略懂略懂’。倒是想想自己，把这个词的字面意思表现的淋漓尽致。
+&emsp;&emsp;时间寥寥草草，回顾这些日子，在自己现在从事的领域，可以说是什么都会一点儿，什么又都不精通，其实这是个尴尬的局面。想过往更深的地方去钻研，自己似乎又没这个能力，毕竟但凡是钻研，就是黑漆漆的。
+&emsp;&emsp;不过话说回来，大多数人都这样，不上不下，生活不允许自己往下，智商不足以让自己往上。说到这个智商，我感觉又在为自己的懒找借口了。
+&emsp;&ems...
+        </p>
+        <p class="article-more-link">
+          <a href="/2016/06/27/%E6%8B%BC%E6%8B%BC%E5%87%91%E5%87%91/#more">Read More</a>
         </p>
       
     </div>
