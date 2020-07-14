@@ -3,21 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>来日方长,去日苦多 | Inner peace</title>
+  <title>Inner peace</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   
-  <meta name="description" content="长江大学 计算机科学与技术 理学硕士 联系邮箱：yuzeyu_jz@163.com  &amp;emsp;&amp;emsp;时间过得很快，总该觉得该留下些什么，却总是因为这样或者那样的问题，一直忙忙碌碌的，静不下心来写东西。或许自己口中所谓的忙碌，也是给自己的懒找一份说辞吧。 &amp;emsp;&amp;emsp;那现在终于总算是偷得半会儿闲，坐在电脑前起了这份稿子。 &amp;emsp;&amp;emsp;不过，到了真要提笔的时候，又不">
+  <meta name="description" content="Someone knock at the door">
 <meta property="og:type" content="website">
-<meta property="og:title" content="来日方长,去日苦多">
-<meta property="og:url" content="https://yuzeyu.cn/about/index.html">
+<meta property="og:title" content="Inner peace">
+<meta property="og:url" content="https://yuzeyu.cn/page/4/index.html">
 <meta property="og:site_name" content="Inner peace">
-<meta property="og:description" content="长江大学 计算机科学与技术 理学硕士 联系邮箱：yuzeyu_jz@163.com  &amp;emsp;&amp;emsp;时间过得很快，总该觉得该留下些什么，却总是因为这样或者那样的问题，一直忙忙碌碌的，静不下心来写东西。或许自己口中所谓的忙碌，也是给自己的懒找一份说辞吧。 &amp;emsp;&amp;emsp;那现在终于总算是偷得半会儿闲，坐在电脑前起了这份稿子。 &amp;emsp;&amp;emsp;不过，到了真要提笔的时候，又不">
+<meta property="og:description" content="Someone knock at the door">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-06-27T01:19:13.000Z">
-<meta property="article:modified_time" content="2020-07-14T12:08:04.711Z">
 <meta property="article:author" content="Mr.Yu">
 <meta name="twitter:card" content="summary">
   
@@ -56,19 +54,13 @@
   <link rel="stylesheet" href="/css/bootstrap.css" >
 
   
-    
-<link rel="stylesheet" href="/css/dialog.css">
-
+    <link rel="stylesheet" href="/css/home.css" >
   
 
   
 
   
-    <link rel="stylesheet" href="/css/header-post.css" >
-  
 
-  
-    <link rel="stylesheet" href="/css/archive.css" >
   
   
   
@@ -81,44 +73,182 @@
 
 
   
-  <div id="container">
-    <div id="wrap">
+    <header id="header">
+
+	<!-- 背景图模式 -->
+	
+
+    
+      <div id="intrologo" class="intro-logo" style="background-position:center; background-repeat:no-repeat; background-image: url(); background-size: auto 100%;">
+
+      <!-- Support rolling -->  
+        
+        <section class="awSlider">
+          <div class="carousel slide carousel-fade " data-ride="carousel">
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+               
+                  
+                    <div class="item active">
+                  
+                    <img id="carousel-img0" src="/css/images/home-bg.jpg">
+                  </div>
+
+                  <!-- 自适应大图 -->
+                  <script>
+                      var img0 = new Image();
+                      var imageTag0 = document.getElementById("carousel-img0");
+                      img0.src = imageTag0.src;
+                      img0.onload=function(){
+                        if (img0.width / img0.height <= document.body.clientWidth / document.body.clientHeight) {
+                          imageTag0.style.width = document.body.clientWidth + "px";
+                        } else {
+                          imageTag0.style.height = document.body.clientHeight + "px";
+                          imageTag0.style.marginLeft = -(document.body.clientHeight * img0.width / img0.height - document.body.clientWidth) / 2 + "px";
+                        }
+                      };
+                  </script>
+                
+                  
+                    <div class="item">
+                  
+                    <img id="carousel-img1" src="/css/images/sample.jpg">
+                  </div>
+
+                  <!-- 自适应大图 -->
+                  <script>
+                      var img1 = new Image();
+                      var imageTag1 = document.getElementById("carousel-img1");
+                      img1.src = imageTag1.src;
+                      img1.onload=function(){
+                        if (img1.width / img1.height <= document.body.clientWidth / document.body.clientHeight) {
+                          imageTag1.style.width = document.body.clientWidth + "px";
+                        } else {
+                          imageTag1.style.height = document.body.clientHeight + "px";
+                          imageTag1.style.marginLeft = -(document.body.clientHeight * img1.width / img1.height - document.body.clientWidth) / 2 + "px";
+                        }
+                      };
+                  </script>
+                
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href=".carousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Geri</span>
+            </a>
+            <a class="right carousel-control" href=".carousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">İleri</span>
+            </a>
+          </div>
+        </section>
+        <script>
+          $('section.awSlider .carousel').carousel({
+              pause: '',
+              interval: 5000
+          });
+          var startImage = $('section.awSlider .item.active > img').attr('src');
+          $('section.awSlider .carousel').on('slid.bs.carousel', function () {
+              var bscn = $(this).find('.item.active > img').attr('src');
+              $('section.awSlider > img').attr('src', bscn);
+          });
+        </script>
       
-        <header>
 
-    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="navbar-inner">
-          
-          <div class="container"> 
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+    
+ 
 
-            
-              <a class="brand" style="
-                 margin-top: 0px;"  
-                 >
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/yu.png">
-              </a>
-            
-            
-            <div class="navbar-collapse collapse">
-              <ul class="hnav navbar-nav">
-                
-                  <li> <a class="main-nav-link" href="/">Home</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/about">About</a> </li>
-                
-                  <li><div id="search-form-wrap">
+
+    <canvas width="100%" height="100%"></canvas>
+    <script>
+      var c = document.getElementsByTagName('canvas')[0],
+          x = c.getContext('2d'),
+          w = window.innerWidth,
+          h = window.innerHeight,
+          pr = window.devicePixelRatio || 1,
+          f = 90,
+          q,
+          m = Math,
+          r = 0,
+          u = m.PI*2,
+          v = m.cos,
+          z = m.random
+      c.width = w*pr
+      c.height = h*pr
+      x.scale(pr, pr)
+      x.globalAlpha = 0.6
+
+      <!-- 折线Polyline背景 -->
+      
+    </script>
+    
+
+    
+      <div id="homelogo" class="homelogo" style="background: rgba(255,255,255,1);"> 
+    
+
+        
+          <div class="homelogoback"  style="border: 1px solid #404040;" >
+            <h1><a href="#content" id="logo">Inner peace</a></h1>
+            <h3>Someone knock at the door</h3>
+            <h5>Mr.Yu</h5>
+            <!-- <p><a href="https://github.com/iTimeTraveler" target="_blank">Github</a></p> -->
+          </div>
+        
+    
+    </div>
+  </div>
+
+  <!-- 自适应主页背景大图 -->
+  
+
+ <!-- home_logo_image居中 -->
+ 
+    <script>
+        var homelogodiv = document.getElementById("homelogo");
+        if (document.all.homelogo.offsetWidth > document.body.clientWidth) {
+          homelogodiv.style.width = document.body.clientWidth + "px";
+          homelogodiv.style.marginLeft = document.body.clientWidth * -0.5 + "px";
+        } else {
+          homelogodiv.style.width = homelogodiv.clientWidth  + "px";
+          homelogodiv.style.marginLeft = (homelogodiv.clientWidth)  * -0.5 + "px";
+        }
+    </script>
+  
+
+  <!-- <div class="intro-navigate">
+      <p class="navigater-list">
+        
+          <a id="beautifont" class="main-nav-link" href="/">Home</a>
+        
+          <a id="beautifont" class="main-nav-link" href="/archives">Archives</a>
+        
+          <a id="beautifont" class="main-nav-link" href="/categories">Categories</a>
+        
+          <a id="beautifont" class="main-nav-link" href="/tags">Tags</a>
+        
+          <a id="beautifont" class="main-nav-link" href="/about">About</a>
+        
+      </p>
+  </div> -->
+
+  <div class="intro-navigate">
+    <span class="navigater-list">
+      
+        <a id="beautifont" class="main-nav-link" href="/">Home</a>
+      
+        <a id="beautifont" class="main-nav-link" href="/archives">Archives</a>
+      
+        <a id="beautifont" class="main-nav-link" href="/categories">Categories</a>
+      
+        <a id="beautifont" class="main-nav-link" href="/tags">Tags</a>
+      
+        <a id="beautifont" class="main-nav-link" href="/about">About</a>
+      
+      </span>
+      <div style="float: right;"><div id="search-form-wrap">
 
     <form class="search-form">
         <input type="text" class="ins-search-input search-form-input" placeholder="" />
@@ -156,105 +286,28 @@
 <script src="/js/insight.js"></script>
 
 
-</div></li>
-            </div>
-          </div>
-                
-      </div>
-    </div>
+</div></div>
+</div>
 
 </header>
-
-
-
   
-    <section class="awSlider">
-      <div class="carousel slide carousel-fade " data-ride="carousel">
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-           
-              
-                <div class="item active" style="max-height:600px; overflow: hidden;">
-              
-                <img id="carousel-img0" src="/css/images/pose.jpg">
-              </div>
-
-              <!-- 自适应大图 -->
-              <script>
-              	  var carouselResize = function() {
-              	  	  var h = document.body.clientHeight / 3;
-	                  var img0 = new Image();
-	                  var imageTag0 = document.getElementById("carousel-img0");
-	                  img0.src = imageTag0.src;
-	                  img0.onload=function(){
-	                    if (img0.width / img0.height <= document.body.clientWidth / h) {
-	                      imageTag0.style.width = document.body.clientWidth + "px";
-	                    } else {
-	                      imageTag0.style.height = h + "px";
-	                      imageTag0.style.marginLeft = -(h * img0.width / img0.height - document.body.clientWidth) / 2 + "px";
-	                    }
-	                  };
-              	  };
-                  carouselResize();
-              </script>
-            
-              
-                <div class="item" style="max-height:600px; overflow: hidden;">
-              
-                <img id="carousel-img1" src="/css/images/sample.jpg">
-              </div>
-
-              <!-- 自适应大图 -->
-              <script>
-              	  var carouselResize = function() {
-              	  	  var h = document.body.clientHeight / 3;
-	                  var img1 = new Image();
-	                  var imageTag1 = document.getElementById("carousel-img1");
-	                  img1.src = imageTag1.src;
-	                  img1.onload=function(){
-	                    if (img1.width / img1.height <= document.body.clientWidth / h) {
-	                      imageTag1.style.width = document.body.clientWidth + "px";
-	                    } else {
-	                      imageTag1.style.height = h + "px";
-	                      imageTag1.style.marginLeft = -(h * img1.width / img1.height - document.body.clientWidth) / 2 + "px";
-	                    }
-	                  };
-              	  };
-                  carouselResize();
-              </script>
-            
-        </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href=".carousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Geri</span>
-        </a>
-        <a class="right carousel-control" href=".carousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">İleri</span>
-        </a>
-      </div>
-    </section>
-    
-  
-
-
-
+  <div id="container">
+    <div id="wrap">
       
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="page-"  class="article article-type-page" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;">
+  
+    <article id="post-拼拼凑凑"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
       <header class="article-header">
         
   
-    <h1 class="thumb" class="article-title" itemprop="name">
-      来日方长,去日苦多
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2016/06/27/%E6%8B%BC%E6%8B%BC%E5%87%91%E5%87%91/">略懂略懂</a>
     </h1>
   
 
@@ -262,85 +315,57 @@
     
     <div class="article-meta">
       
+	<a href="/2016/06/27/%E6%8B%BC%E6%8B%BC%E5%87%91%E5%87%91/" class="article-date">
+	  <time datetime="2016-06-27T08:48:00.000Z" itemprop="datePublished">2016-06-27</time>
+	</a>
+
       
+    <a class="article-category-link" href="/categories/%E9%97%B2%E6%89%AF/">闲扯</a>
+
       
       
 
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>长江大学 计算机科学与技术 理学硕士 联系邮箱：<a href="mailto:yuzeyu_jz@163.com">yuzeyu_jz@163.com</a></p>
-</blockquote>
-<p>&emsp;&emsp;时间过得很快，总该觉得该留下些什么，却总是因为这样或者那样的问题，一直忙忙碌碌的，静不下心来写东西。或许自己口中所谓的忙碌，也是给自己的懒找一份说辞吧。</p>
-<p>&emsp;&emsp;那现在终于总算是偷得半会儿闲，坐在电脑前起了这份稿子。</p>
-<p>&emsp;&emsp;不过，到了真要提笔的时候，又不知道写些什么了。那就暂且这样吧，凡是总得有个头，东西先起在这儿，看自己心情，心情好了把自己最近工作总结一下，心情不好的时候呢，上来叨叨两句，好歹也能为以后留份记忆。</p>
-<p>&emsp;&emsp;就怕自己终归还是逃不过一个懒字。</p>
-
+        <p class="article-excerpt-content">
+          缘起1《越光宝盒》里，曾志伟演的诸葛亮总是说‘略懂略懂’。倒是想想自己，把这个词的字面意思表现的淋漓尽致。
+&emsp;&emsp;时间寥寥草草，回顾这些日子，在自己现在从事的领域，可以说是什么都会一点儿，什么又都不精通，其实这是个尴尬的局面。想过往更深的地方去钻研，自己似乎又没这个能力，毕竟但凡是钻研，就是黑漆漆的。
+&emsp;&emsp;不过话说回来，大多数人都这样，不上不下，生活不允许自己往下，智商不足以让自己往上。说到这个智商，我感觉又在为自己的懒找借口了。
+&emsp;&ems...
+        </p>
+        <p class="article-more-link">
+          <a href="/2016/06/27/%E6%8B%BC%E6%8B%BC%E5%87%91%E5%87%91/#more">Read More</a>
+        </p>
       
     </div>
     <footer class="article-footer">
       
       
-      <div>
-        <ul class="post-copyright">
-          <li class="post-copyright-author">
-          <strong>Post author:  </strong>Mr.Yu</a>
-          </li>
-          <li class="post-copyright-link">
-          <strong>Post link:  </strong>
-          <a href="/about/index.html" target="_blank" title="来日方长,去日苦多">https://yuzeyu.cn/about/index.html</a>
-          </li>
-          <li class="post-copyright-license">
-            <strong>Copyright Notice:   </strong>
-            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-            unless stating additionally.
-          </li>
-         
-        </ul>
-<div>
-
-      
-      
-        
-	<div id="comment">
-		<!-- 来必力City版安装代码 -->
-		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
-		<script type="text/javascript">
-		   (function(d, s) {
-		       var j, e = d.getElementsByTagName(s)[0];
-
-		       if (typeof LivereTower === 'function') { return; }
-
-		       j = d.createElement(s);
-		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-		       j.async = true;
-
-		       e.parentNode.insertBefore(j, e);
-		   })(document, 'script');
-		</script>
-		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-		</div>
-		<!-- City版安装代码已完成 -->
-	</div>
-
-
-
       
       
 
     </footer>
   </div>
   
-    
-  
 </article>
 
 <!-- Table of Contents -->
 
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
 </section>
         
       </div>
+      
+        <div align="center" style="margin-top: 30px;"><hr class="hr" style="margin:0px; height:3px;"></div>
       
       <footer id="footer">
   
@@ -436,6 +461,10 @@
 
 <script src="/js/scripts.js"></script>
 
+
+
+  
+<script src="/js/home.js"></script>
 
 
 
