@@ -1402,6 +1402,7 @@ a.article-title:hover {
   font-size: 120%;
 }
 #toc {
+  height: 76%;
   width: inherit;
   line-height: 1em;
   font-size: 0.9em;
@@ -1418,6 +1419,18 @@ a.article-title:hover {
   #toc {
     display: none;
   }
+}
+#toc::-webkit-scrollbar {
+  background-color: #ece9e9;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2px;
+  width: 5px;
+}
+#toc::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(0,0,0,0.3);
+  -webkit-box-shadow: inset 0 0 6px RGB(243, 243, 244);
 }
 .toc-fixed {
   position: fixed;
